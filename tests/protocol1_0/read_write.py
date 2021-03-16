@@ -31,6 +31,7 @@
 import os
 import time
 import math
+from dynamixel_sdk import *
 
 if os.name == 'nt':
     import msvcrt
@@ -48,11 +49,11 @@ else:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
-from dynamixel_sdk import *                    # Uses Dynamixel SDK library
+
 
 # Control table address
 ADDR_MX_CCW_ANGLE_LIMIT     = 8
-ADDR_MX_TORQUE_ENABLE      = 24               # Control table address is different in Dynamixel model
+ADDR_MX_TORQUE_ENABLE      = 24
 ADDR_MX_GOAL_POSITION      = 30
 ADDR_MX_MOVING_SPEED       = 32
 ADDR_MX_TORQUE_LIMIT       = 34
@@ -60,76 +61,106 @@ ADDR_MX_PRESENT_POSITION   = 36
 ADDR_MX_PRESENT_SPEED   = 38
 
 # Protocol version
-PROTOCOL_VERSION            = 1.0               # See which protocol version is used in the Dynamixel
+PROTOCOL_VERSION            = 1.0
 
 # Default setting
-DXL_ID                      = 2                 # Dynamixel ID : 1
-BAUDRATE                    = 1000000             # Dynamixel default baudrate : 57600
-DEVICENAME                  = 'COM5'    # Check which port is being used on your controller
-                                                # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
+DXL1_ID                      = 1
+DXL2_ID                      = 2
+BAUDRATE                    = 1000000
+DEVICENAME                  = 'COM5'
 
-TORQUE_ENABLE               = 1                 # Value for enabling the torque
-TORQUE_DISABLE              = 0                 # Value for disabling the torque
-DXL_MINIMUM_POSITION_VALUE  = 0           # Dynamixel will rotate between this value
-DXL_MAXIMUM_POSITION_VALUE  = 1023            # and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
-DXL_MOVING_STATUS_THRESHOLD = 5                # Dynamixel moving status threshold
+TORQUE_ENABLE               = 1
+TORQUE_DISABLE              = 0
+DXL_MOVING_STATUS_THRESHOLD = 5
 DXL_MAXIMUM_TORQUE   = 250
+FULL_SPEED = 1023
 
-index = 0
-dxl_goal_position = [DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE]         # Goal position
+class Position:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.range = 2.75*360/(100/341)
+        self.domain = 4.35*360/(100/341)
+
+        # Initialize PortHandler instance
+        # Set the port path
+        # Get methods and members of PortHandlerLinux or PortHandlerWindows
+        self.portHandler = PortHandler(DEVICENAME)
+        # Initialize PacketHandler instance
+        # Set the protocol version
+        # Get methods and members of Protocol1PacketHandler or Protocol2PacketHandler
+        self.packetHandler = PacketHandler(PROTOCOL_VERSION)
+
+        # Open port
+        if self.portHandler.openPort():
+            print("Succeeded to open the port")
+        else:
+            print("Failed to open the port")
+            print("Press any key to terminate...")
+            getch()
+            quit()
+
+        # Set port baudrate
+        if self.portHandler.setBaudRate(BAUDRATE):
+            print("Succeeded to change the baudrate")
+        else:
+            print("Failed to change the baudrate")
+            print("Press any key to terminate...")
+            getch()
+            quit()
+
+        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
+        elif dxl_error != 0:
+            print("%s" % packetHandler.getRxPacketError(dxl_error))
+        else:
+            print("Dynamixel 1 has been successfully connected")
+        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
+        elif dxl_error != 0:
+            print("%s" % packetHandler.getRxPacketError(dxl_error))
+        else:
+            print("Dynamixel 2 has been successfully connected")
+
+        # Enable Dynamixel Torque
+        self.packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+        self.packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+
+        #limit torque for safty
+        self.packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
+        self.packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
+
+    def goto(self,toX,toY):
+        if toX < 0 or toX > self.domain:
+            print("out side of domain")
+        elif toY < 0 or toY > self.range:
+            print("out side of range")
+        else:
+            time = time.time()
+            oldTime = 0
+
+            xSpeed = FULL_SPEED
+            ySpeed = FULL_SPEED
+
+            if toX < self.x:
+                xSpeed = xSpeed + 1024
+            elif toX == self.x:
+                xSpeed = 0
+
+            if toY < self.y:
+                ySpeed = ySpeed + 1024
+            elif toY == self.y:
+                ySpeed = 0
+
+            while toX != self.x and toY != self.y:
 
 
-# Initialize PortHandler instance
-# Set the port path
-# Get methods and members of PortHandlerLinux or PortHandlerWindows
-portHandler = PortHandler(DEVICENAME)
 
-# Initialize PacketHandler instance
-# Set the protocol version
-# Get methods and members of Protocol1PacketHandler or Protocol2PacketHandler
-packetHandler = PacketHandler(PROTOCOL_VERSION)
-
-# Open port
-if portHandler.openPort():
-    print("Succeeded to open the port")
-else:
-    print("Failed to open the port")
-    print("Press any key to terminate...")
-    getch()
-    quit()
-
-
-# Set port baudrate
-if portHandler.setBaudRate(BAUDRATE):
-    print("Succeeded to change the baudrate")
-else:
-    print("Failed to change the baudrate")
-    print("Press any key to terminate...")
-    getch()
-    quit()
-
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 2, ADDR_MX_CCW_ANGLE_LIMIT, 0)
-
-# Enable Dynamixel Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
-if dxl_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-elif dxl_error != 0:
-    print("%s" % packetHandler.getRxPacketError(dxl_error))
-else:
-    print("Dynamixel has been successfully connected")
-
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 2, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
-#x = 4.35
-tme = time.time()
-oldTme = 0
-movingAvg = 0
 pos = 0
 avg = 0
-range = 2.75*360/(100/341)
-domain = 4.35*360/(100/341)
+
 length = range
 rots = 0
 blind = False
