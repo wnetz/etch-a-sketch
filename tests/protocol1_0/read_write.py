@@ -79,8 +79,16 @@ class Position:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.range = 2.75*360/(100/341)
-        self.domain = 4.35*360/(100/341)
+        self.domain = 4.15*360/(100/341)
+        self.range = 2.6*360/(100/341)
+        self.rotationBuffer = 10
+        self.zeroPosition = [0,0]
+        self.rotations = [0,0]
+        self.alpha = .05
+        self.rotAlpha = .1
+        self.off = [[],[]]
+        self.err = [[],[]]
+        self.rottimes = [[],[]]
 
         # Initialize PortHandler instance
         # Set the port path
@@ -109,14 +117,14 @@ class Position:
             getch()
             quit()
 
-        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
         if dxl_comm_result != COMM_SUCCESS:
             print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
             print("%s" % packetHandler.getRxPacketError(dxl_error))
         else:
             print("Dynamixel 1 has been successfully connected")
-        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
         if dxl_comm_result != COMM_SUCCESS:
             print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
@@ -125,211 +133,200 @@ class Position:
             print("Dynamixel 2 has been successfully connected")
 
         # Enable Dynamixel Torque
-        self.packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
-        self.packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+        self.packetHandler.write1ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+        self.packetHandler.write1ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
 
         #limit torque for safty
-        self.packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
-        self.packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
+        self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
+        self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
+    def getSpeed(self,xDistance,yDistance):
+        xSpeed = 0
+        ySpeed = 0
+        if abs(xDistance) > abs(yDistance):
+            xSpeed = FULL_SPEED
+            ySpeed = FULL_SPEED * abs(yDistance/xDistance)
+            if abs(yDistance) < 1227.6:
+                ySpeed = abs(yDistance)/1227.6*ySpeed
+                ySpeed = max(min(1023,ySpeed),150)
+            xSpeed = ySpeed / abs(yDistance/xDistance)
+            if yDistance < 0:
+                ySpeed = ySpeed+1024
+            if xDistance < 0:
+                xSpeed = xSpeed+1024
+            if yDistance > -self.rotationBuffer and yDistance < self.rotationBuffer:
+                ySpeed = 0
+            if xDistance > -self.rotationBuffer and xDistance < self.rotationBuffer:
+                xSpeed = 0
+        else:
+            xSpeed = FULL_SPEED * abs(xDistance/yDistance)
+            ySpeed = FULL_SPEED
+            if abs(xDistance) < 1227.6:
+                xSpeed = abs(xDistance)/1227.6*xSpeed
+                xSpeed = max(min(1023,xSpeed),150)
+            ySpeed = xSpeed / abs(xDistance/yDistance)
+            if xDistance < 0:
+                xSpeed = xSpeed+1024
+            if yDistance < 0:
+                ySpeed = ySpeed+1024
+            if yDistance > -self.rotationBuffer and yDistance < self.rotationBuffer:
+                ySpeed = 0
+            if xDistance > -self.rotationBuffer and xDistance < self.rotationBuffer:
+                xSpeed = 0
 
-    def goto(self,toX,toY):
+        return [xSpeed,ySpeed]
+    def unBlind(self,position,oldPosition,avgRotationDifferance, timeDifferance, side, buffer):
+        if position > side and position < side + buffer:
+            differance = abs(oldPosition+avgRotationDifferance*timeDifferance-position)
+            if differance > 1023:
+                differance = differance - 1227.6
+            self.off.append(abs(oldPosition+avgRotationDifferance*timeDifferance-position))
+            self.err.append(abs(oldPosition+avgRotationDifferance*timeDifferance-position)/1227.6)
+            return False
+        return True
+    def goTo(self,toX,toY):
         if toX < 0 or toX > self.domain:
             print("out side of domain")
         elif toY < 0 or toY > self.range:
             print("out side of range")
         else:
-            time = time.time()
+            speed = self.getSpeed(toX-self.x,toY-self.y)
+            print(speed)
+            xZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_PRESENT_POSITION)
+            while (xZeroPosition > 923 and xZeroPosition <= 1023) or (xZeroPosition >= 0 and xZeroPosition < 100) or (xZeroPosition > 615 and xZeroPosition < 630):
+                dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_MOVING_SPEED, 2047)
+                xZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_PRESENT_POSITION)
+            self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_MOVING_SPEED, 0)
+            xZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_PRESENT_POSITION)
+
+            yZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_PRESENT_POSITION)
+            while (yZeroPosition > 923 and yZeroPosition <= 1023) or (yZeroPosition >= 0 and yZeroPosition < 100) or (yZeroPosition > 615 and yZeroPosition < 630):
+                dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_MOVING_SPEED, 2047)
+                yZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_PRESENT_POSITION)
+            self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_MOVING_SPEED, 0)
+            yZeroPosition, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_PRESENT_POSITION)
+
+            self.zeroPosition = [xZeroPosition,yZeroPosition]
+            blind = [False,False]
+            start = [True,True]
+            oldpos = [0,0]
+            avgRotationDifferance = [0,0]
+            rotationTime = [0,0]
+            position = [self.zeroPosition[0],self.zeroPosition[1]]
+            oldPosition = [self.zeroPosition[0],self.zeroPosition[1]]
+            projectedPosition = [self.zeroPosition[0],self.zeroPosition[1]]
+            off = [[],[]]
+            err = [[],[]]
+            rotationtimes = [[],[]]
             oldTime = 0
+            side = [0,0]
+            buffer = [100,100]
 
-            xSpeed = FULL_SPEED
-            ySpeed = FULL_SPEED
+            if speed[0] > 1023:
+                buffer[0] = -100
+                side[0] = 1023 + buffer[0]
+            if speed[1] > 1023:
+                buffer[1] = -100
+                side[1] = 1023 + buffer[1]
 
-            if toX < self.x:
-                xSpeed = xSpeed + 1024
-            elif toX == self.x:
-                xSpeed = 0
+            print(self.zeroPosition,position)
 
-            if toY < self.y:
-                ySpeed = ySpeed + 1024
-            elif toY == self.y:
-                ySpeed = 0
+            tine = time.time()
+            while toX < self.x - self.rotationBuffer or toX > self.x + self.rotationBuffer or toY < self.y - self.rotationBuffer or toY > self.y + self.rotationBuffer:
 
-            while toX != self.x and toY != self.y:
+                position[0], dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_PRESENT_POSITION)
+                position[1], dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_PRESENT_POSITION)
 
+                speed = self.getSpeed(toX-self.x,toY-self.y)
+                print(speed)
+                self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_MOVING_SPEED, int(round(speed[0],0)))
+                self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_MOVING_SPEED, int(round(speed[1],0)))
 
+                timeDifferance = time.time()-tine
+                projectedPosition = [oldPosition[0] + timeDifferance*avgRotationDifferance[0], oldPosition[1] + timeDifferance*avgRotationDifferance[1]]
+                print("time diff: " + str(timeDifferance))
+                print(oldPosition)
+                if blind[0]:
+                    print("X blind")
+                    blind[0] = self.unBlind(position[0],oldPosition[0],avgRotationDifferance[0], timeDifferance, side[0], buffer[0])
+                    if blind[0]:
+                        position[0] = projectedPosition[0]
+                else:
+                    if avgRotationDifferance[0] == 0:
+                        avgRotationDifferance[0] = (position[0]-oldPosition[0])/timeDifferance
+                    avgRotationDifferance[0] = avgRotationDifferance[0]*self.rotAlpha + ((position[0]-oldPosition[0])/timeDifferance)*(1-self.rotAlpha)
+                if blind[1]:
+                    print("Y blind")
+                    blind[1] = self.unBlind(position[1],oldPosition[1],avgRotationDifferance[1], timeDifferance, side[1], buffer[1])
+                    if blind[1]:
+                        position[1] = projectedPosition[1]
+                else:
+                    if avgRotationDifferance[1] == 0:
+                        avgRotationDifferance[1] = (position[1]-oldPosition[1])/timeDifferance
+                    avgRotationDifferance[1] = avgRotationDifferance[1]*self.rotAlpha + ((position[1]-oldPosition[1])/timeDifferance)*(1-self.rotAlpha)
 
-pos = 0
-avg = 0
+                if not blind[0]:
+                    if position[0] + avgRotationDifferance[0]*timeDifferance >= 1023:
+                        position[0] = projectedPosition[0]
+                        blind[0] = True
+                    elif position[0] + avgRotationDifferance[0]*timeDifferance <= 0:
+                        projectedPosition[0] = projectedPosition[0]-1227.6
+                        position[0] = projectedPosition[0]
+                        blind[0] = True
+                if not blind[1]:
+                    if position[1] + avgRotationDifferance[1]*timeDifferance >= 1023:
+                        position[1] = projectedPosition[1]
+                        blind[1] = True
+                    elif position[1] + avgRotationDifferance[1]*timeDifferance <= 0:
+                        projectedPosition[1] = projectedPosition[1]-1227.6
+                        position[1] = projectedPosition[1]
+                        blind[1] = True
 
-length = range
-rots = 0
-blind = False
-start = True
-speed = 0
-alpha = .05
-rotAlpha = .1
-oldpos = 0
-diff = 0
-avgRotDiff = 0
-rotTime = 0
-oldPosi = 0
-off = []
-err = []
-rottimes = []
+                if start[0] and position[0] > self.zeroPosition[0] + self.rotationBuffer:
+                    start[0] = False
+                if start[1] and position[1] > self.zeroPosition[1] + self.rotationBuffer:
+                    start[1] = False
 
-zeroPos, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION)
-if dxl_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-elif dxl_error != 0:
-    print("%s" % packetHandler.getRxPacketError(dxl_error))
-print(zeroPos)
-while (zeroPos > 923 and zeroPos <= 1023) or (zeroPos >= 0 and zeroPos < 100) or (zeroPos > 615 and zeroPos < 630):
-    dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 2047)
-    zeroPos, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION)
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-    elif dxl_error != 0:
-        print("%s" % packetHandler.getRxPacketError(dxl_error))
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 0)
-print(zeroPos)
-proj = zeroPos
-oldPosi = zeroPos
+                print(self.zeroPosition[0] - self.rotationBuffer,position[0],self.zeroPosition[0] + self.rotationBuffer,start[0],tine-rotationTime[0])
+                if position[0] > self.zeroPosition[0] - self.rotationBuffer and position[0] < self.zeroPosition[0] + self.rotationBuffer and not start[0] and tine-rotationTime[0] > .5:
+                    rotationtimes[0].append(tine-rotationTime[0])
+                    rotationTime[0] = tine
+                    self.rotations[0] = self.rotations[0] + 1
+                    print("X rotations " + str(self.rotations[0]))
+                if speed[0] != 0:
+                    self.x = self.rotations[0]*360/(100/341) + position[0] - self.zeroPosition[0]
+                if position[1] > self.zeroPosition[1] - self.rotationBuffer and position[1] < self.zeroPosition[1] + self.rotationBuffer and not start[1] and tine-rotationTime[1] > .5:
+                    rotationtimes[1].append(tine-rotationTime[1])
+                    rotationTime[1] = tine
+                    self.rotations[1] = self.rotations[1] + 1
+                    print("Y rotations " + str(self.rotations[1]))
+                if speed[1] != 0:
+                    self.y = self.rotations[1]*360/(100/341) + position[1] - self.zeroPosition[1]
 
-while pos < length:
-    dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 1023)
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-    elif dxl_error != 0:
-        print("%s" % packetHandler.getRxPacketError(dxl_error))
+                if self.x < 0:
+                    self.x = self.x + 1227
+                if self.y < 0:
+                    self.y = self.y + 1227
+                z = [self.x,self.y]
+                print("Pos", z,"RotPos",position,"ProjPos",projectedPosition,"Rots",self.rotations,"speed",speed,"rotDiff",[position[0]-oldPosition[0],position[1]-oldPosition[1]],"avgRotDiff",avgRotationDifferance)
+                oldPosition = [position[0],position[1]]
+                tine = time.time()
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_MOVING_SPEED, 0)
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_MOVING_SPEED, 0)
+    def printError(self):
+        print([self.x,self.y])
+        print(self.off)
+        print(self.err)
+        print(self.rottimes)
+    def end(self):
+        # Disable Dynamixel Torque
+        self.packetHandler.write1ByteTxRx(self.portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
+        self.packetHandler.write1ByteTxRx(self.portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
 
-    posi, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION)
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-    elif dxl_error != 0:
-        print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-    speed, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_SPEED)
-    diff = time.time()-tme
-    proj = oldPosi + diff*avgRotDiff
-    if blind:
-        if posi > 0 and posi < 100:
-            blind = False
-            print(str(time.time()-tme)+" "+str(avg))
-            off.append(abs(oldPosi+avgRotDiff*diff-1227.6-posi))
-            err.append(abs(oldPosi+avgRotDiff*diff-1227.6-posi)/1227.6)
-        else:
-            if dxl_comm_result != COMM_SUCCESS:
-                print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-            elif dxl_error != 0:
-                print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-
-            print("time " + str(diff))
-            #posi = oldPosi + (diff)*avg
-            posi = proj
-    else:
-
-        print("time diff: " + str(diff))
-        if avg == 0:
-            avg = speed
-        if speed > 0:
-            avg = avg*alpha + speed*(1-alpha)
-        if avgRotDiff == 0:
-            avgRotDiff = (posi-oldPosi)/diff
-        avgRotDiff = avgRotDiff*rotAlpha + ((posi-oldPosi)/diff)*(1-rotAlpha)
-
-    if posi + avgRotDiff*diff >= 1023 and not blind:
-        blind = True
-        proj = posi
-    if start and posi > zeroPos +7:
-        start = False
-    if posi > zeroPos -7 and posi < zeroPos +7 and not start and (rotTime == 0 or tme-rotTime > .5):
-        rottimes.append(tme-rotTime)
-        rotTime = tme
-        rots = rots + 1
-        print("rots " + str(rots))
-    pos = rots*360/(100/341) + posi - zeroPos
-    if pos < 0:
-        pos = pos + 1024 + 60
-    print("pos " +  str(pos) + " posi "+str(posi)  + " Proj " + str(proj) + " rots " + str(rots) + " speed " + str(speed) + " avg "+str(avg)  + " rotDiff " + str(posi-oldPosi) + " avgRotDiff "+str(avgRotDiff))
-    oldPosi = posi
-    tme = time.time()
-print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-end = pos
-start = False
-rots = 0
-while pos > 0:
-    dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 2047)
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-    elif dxl_error != 0:
-        print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-    posi, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION)
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-    elif dxl_error != 0:
-        print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-    speed, dxl_comm_result, dxl_error = packetHandler.read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_SPEED)
-    diff = time.time()-tme
-    proj = oldPosi - diff*avgRotDiff
-    if blind:
-        if posi < 1023 and posi > 923:
-            blind = False
-            print(str(time.time()-tme)+" "+str(avg))
-            off.append(abs(oldPosi+avgRotDiff*diff-posi))
-            err.append(abs(oldPosi+avgRotDiff*diff-posi)/1227.6)
-        else:
-            if dxl_comm_result != COMM_SUCCESS:
-                print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-            elif dxl_error != 0:
-                print("%s" % packetHandler.getRxPacketError(dxl_error))
+        # Close port
+        self.portHandler.closePort()
 
 
-            print("time " + str(diff))
-            #posi = oldPosi + (diff)*avg
-            posi = proj
-    else:
-
-        print("time diff: " + str(diff))
-        if avg == 0:
-            avg = speed
-        if speed > 0:
-            avg = avg*alpha + speed*(1-alpha)
-        if avgRotDiff == 0:
-            avgRotDiff = (oldPosi-posi)/diff
-        avgRotDiff = avgRotDiff*rotAlpha + ((oldPosi-posi)/diff)*(1-rotAlpha)
-
-    if posi - avgRotDiff*diff <= 0 and not blind:
-        blind = True
-        proj = posi + 1227.6
-        posi = proj
-    if start and posi < end -7 or tme - rotTime > .5:
-        start = False
-    if posi > zeroPos -7 and posi < zeroPos +7 and not start and (rotTime == 0 or tme-rotTime > .5):
-        rottimes.append(tme-rotTime)
-        rotTime = tme
-        rots = rots + 1
-        print("rots " + str(rots))
-    pos = end - rots*360/(100/341) + (posi -1227.6)
-    if pos < 0:
-        pos = pos + 1024 + 60
-    print("pos " + str(pos) + " posi "+str(posi)  + " Proj " + str(proj) + " rots " + str(rots) + " speed " + str(speed) + " avg "+str(avg)  +  " avgRotDiff "+str(avgRotDiff))
-    oldPosi = posi
-    tme = time.time()
-print(posi)
-print(zeroPos)
-print(off)
-print(err)
-print(rottimes)
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 0)
-# Disable Dynamixel Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-if dxl_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-elif dxl_error != 0:
-    print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-# Close port
-portHandler.closePort()
+draw = Position()
+print([draw.domain/2,draw.range/2])
+draw.goTo(draw.domain/2,draw.range/2)
+#draw.goTo(draw.domain,draw.range)
