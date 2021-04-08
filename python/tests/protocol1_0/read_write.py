@@ -53,31 +53,37 @@ else:
 
 # Control table address
 ADDR_MX_CCW_ANGLE_LIMIT     = 8
-ADDR_MX_TORQUE_ENABLE      = 24
-ADDR_MX_GOAL_POSITION      = 30
-ADDR_MX_MOVING_SPEED       = 32
-ADDR_MX_TORQUE_LIMIT       = 34
-ADDR_MX_PRESENT_POSITION   = 36
-ADDR_MX_PRESENT_SPEED   = 38
+ADDR_MX_TORQUE_ENABLE       = 24
+ADDR_MX_D                   = 26
+ADDR_MX_I                   = 27
+ADDR_MX_P                   = 28
+ADDR_MX_GOAL_POSITION       = 30
+ADDR_MX_MOVING_SPEED        = 32
+ADDR_MX_TORQUE_LIMIT        = 34
+ADDR_MX_PRESENT_POSITION    = 36
+ADDR_MX_PRESENT_SPEED       = 38
+ADDR_MX_MOVING              = 46
 
 # Protocol version
 PROTOCOL_VERSION            = 1.0
 
 # Default setting
 HORIZONTAL                  = 0
-VERTICAL                    = 2
+VERTICAL                    = 1
 BAUDRATE                    = 1000000
 DEVICENAME                  = 'COM5'
 
 TORQUE_ENABLE               = 1
 TORQUE_DISABLE              = 0
 DXL_MOVING_STATUS_THRESHOLD = 5
-DXL_MAXIMUM_TORQUE   = 250
+DXL_MAXIMUM_TORQUE          = 800
+DXL_D                       = 254
+DXL_I                       = 0
+DXL_P                       = 20
+DXL_MAXIMUM_SPEED           = 225 #225    
 
 class Position:
-    def __init__(self):
-        self.x = 0
-        self.y = 0
+    def __init__(self):        
 
         # Initialize PortHandler instance
         # Set the port path
@@ -107,18 +113,18 @@ class Position:
             quit()
         
         # Enable Dynamixel Torque
-        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
         if dxl_comm_result != COMM_SUCCESS:
-            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
+            print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
-            print("%s" % packetHandler.getRxPacketError(dxl_error))
+            print("%s" % self.packetHandler.getRxPacketError(dxl_error))
         else:
             print("Dynamixel 1 has been successfully connected")
-        dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
         if dxl_comm_result != COMM_SUCCESS:
-            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
+            print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
-            print("%s" % packetHandler.getRxPacketError(dxl_error))
+            print("%s" % self.packetHandler.getRxPacketError(dxl_error))
         else:
             print("Dynamixel 2 has been successfully connected")
 
@@ -126,19 +132,70 @@ class Position:
         self.packetHandler.write2ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
         self.packetHandler.write2ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
 
-        self.xStartPosition = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_POSITION)
-        self.yStartPosition = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_POSITION)
+        self.xStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
+        self.yStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
+        print(self.xStartPosition,self.yStartPosition)
+
+        #set speed
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,DXL_MAXIMUM_SPEED)
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,DXL_MAXIMUM_SPEED)
+        #D
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_D,DXL_D)
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_D,DXL_D)
+        #I
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_I,DXL_I)
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_I,DXL_I)
+        #P
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_P,DXL_P)
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_P,DXL_P)
 
     def goto(self,toX,toY):
-        self.portHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_POSITION,tox + self.xStartPosition)
-        self.portHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_POSITION,tox + self.yStartPosition)
+        
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_POSITION,math.floor((toX + self.xStartPosition)))
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_POSITION,math.floor((toY + self.yStartPosition)))
+        #if not (self.x - toX == 0):
+        #    slope = (self.y - toY)/(self.x - toX)
+        #    print(slope)
+        #    if slope <= 1:
+        #        print(math.floor(DXL_MAXIMUM_SPEED*(1-slope)),math.floor(DXL_MAXIMUM_SPEED*slope))
+        #        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*slope))
+        #        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1-slope)))
+        #    else:
+        #        print(math.floor(DXL_MAXIMUM_SPEED*(1/slope)),DXL_MAXIMUM_SPEED*(1-(1/slope)))
+        #        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1-(1/slope))))
+        #        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1/slope)))
+        xmoving = True
+        ymoving = True
+
+        while xmoving or ymoving:
+            xmoving, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING)
+            ymoving, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING)
 
 
+        self.x, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
+        self.x = self.xStartPosition - self.x
+        self.y, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
+        self.y = self.yStartPosition - self.y
+    def getPosition(self):
+        return [self.x,self.y]
+    def disconect(self):
+        # Disable Dynamixel Torque
+        self.packetHandler.write1ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
+        self.packetHandler.write1ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
 
+        # Close port
+        self.portHandler.closePort()
 
-# Disable Dynamixel Torque
-packetHandler.write1ByteTxRx(portHandler, HORIZONTAL, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-packetHandler.write1ByteTxRx(portHandler, VERTICAL, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-
-# Close port
-portHandler.closePort()
+test = Position()
+xmax = 18000
+ymax = 12000
+test.goto(0,0)
+inp = "0,0"
+while "q" not in inp:    
+    loc = inp.find(",")
+    xval = int(inp[0:loc])
+    yval = int(inp[loc+1:])
+    resolution = 20
+    test.goto(xval,yval)
+    print(test.getPosition())
+    inp = input()
