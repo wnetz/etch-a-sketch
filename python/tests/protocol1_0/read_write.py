@@ -63,6 +63,7 @@ ADDR_MX_TORQUE_LIMIT        = 34
 ADDR_MX_PRESENT_POSITION    = 36
 ADDR_MX_PRESENT_SPEED       = 38
 ADDR_MX_MOVING              = 46
+ADDR_MX_GOAL_ACCELERATION   = 73
 
 # Protocol version
 PROTOCOL_VERSION            = 1.0
@@ -80,7 +81,7 @@ DXL_MAXIMUM_TORQUE          = 800
 DXL_D                       = 254
 DXL_I                       = 0
 DXL_P                       = 20
-DXL_MAXIMUM_SPEED           = 225 #225    
+DXL_MAXIMUM_SPEED           = 1023   
 
 class Position:
     def __init__(self):        
@@ -135,10 +136,12 @@ class Position:
         self.xStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
         self.yStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
         print(self.xStartPosition,self.yStartPosition)
+        if self.xStartPosition > 28672:
+            self.xStartPosition = self.xStartPosition - 65536
+        if self.yStartPosition > 28672:
+            self.yStartPosition = self.yStartPosition - 65536
+        print(self.xStartPosition,self.yStartPosition)
 
-        #set speed
-        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,DXL_MAXIMUM_SPEED)
-        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,DXL_MAXIMUM_SPEED)
         #D
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_D,DXL_D)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_D,DXL_D)
@@ -149,33 +152,57 @@ class Position:
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_P,DXL_P)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_P,DXL_P)
 
-    def goto(self,toX,toY):
+        self.x = 0
+        self.y = 0
+
+    def goto(self,toX,toY):       
+
+        ratiox = 1
+        ratioy = 1
+        if abs(self.y - toY) > abs(self.x - toX):
+            ratioy = abs((self.x - toX)/(self.y - toY))
+            ratiox = 1 - ratioy
+        elif abs(self.x - toX) > abs(self.y - toY):
+            ratiox = abs((self.y - toY)/(self.x - toX))
+            ratioy = 1 - ratiox
+
+        print(ratiox,ratioy)
+
+        #self.packetHandler.write1ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_ACCELERATION,math.floor(ratiox*254))
+        #self.packetHandler.write1ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_ACCELERATION,math.floor(ratioy*254))        
+
         
+        #print(self.packetHandler.read1ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_ACCELERATION),self.packetHandler.read1ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_ACCELERATION))
+
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_GOAL_POSITION,math.floor((toX + self.xStartPosition)))
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_GOAL_POSITION,math.floor((toY + self.yStartPosition)))
-        #if not (self.x - toX == 0):
-        #    slope = (self.y - toY)/(self.x - toX)
-        #    print(slope)
-        #    if slope <= 1:
-        #        print(math.floor(DXL_MAXIMUM_SPEED*(1-slope)),math.floor(DXL_MAXIMUM_SPEED*slope))
-        #        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*slope))
-        #        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1-slope)))
-        #    else:
-        #        print(math.floor(DXL_MAXIMUM_SPEED*(1/slope)),DXL_MAXIMUM_SPEED*(1-(1/slope)))
-        #        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1-(1/slope))))
-        #        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(DXL_MAXIMUM_SPEED*(1/slope)))
+
+        self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(ratiox*500))
+        self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(ratioy*500))
+        print(self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED),self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED))
+        
+
         xmoving = True
         ymoving = True
 
         while xmoving or ymoving:
+            self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(ratiox*500))
+            self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(ratioy*500))
             xmoving, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING)
             ymoving, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING)
 
-
-        self.x, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
-        self.x = self.xStartPosition - self.x
-        self.y, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
-        self.y = self.yStartPosition - self.y
+            self.x, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
+            if self.x > 28672:
+                self.x = self.x - 65536      
+            self.x = self.x - self.xStartPosition            
+            
+            self.y, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
+            if self.y > 28672:
+                self.y = self.y - 65536
+            self.y = self.y - self.yStartPosition
+            #self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,min(math.floor(ratioy*1023), max(50,abs(math.floor((self.y-toY)/10)))))
+            #print(min(math.floor(ratiox*1023), max(50,abs(math.floor((self.x-toX)/10)))),min(math.floor(ratioy*1023), max(50,abs(math.floor((self.y-toY)/10)))))
+            #print(self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED),self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED))
     def getPosition(self):
         return [self.x,self.y]
     def disconect(self):
@@ -189,8 +216,7 @@ class Position:
 test = Position()
 xmax = 18000
 ymax = 12000
-test.goto(0,0)
-inp = "0,0"
+inp = input()
 while "q" not in inp:    
     loc = inp.find(",")
     xval = int(inp[0:loc])
