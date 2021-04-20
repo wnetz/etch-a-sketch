@@ -1,32 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-################################################################################
-# Copyright 2017 ROBOTIS CO., LTD.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-################################################################################
 
-# Author: Ryu Woon Jung (Leon)
-
-#
-# *********     Read and Write Example      *********
-#
-#
-# Available DXL model on this example : All models using Protocol 1.0
-# This example is tested with a DXL MX-28, and an USB2DYNAMIXEL
-# Be sure that DXL MX properties are already set as %% ID : 1 / Baudnum : 34 (Baudrate : 57600)
-#
 
 import os
 import time
@@ -49,21 +24,14 @@ else:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
-
-
 # Control table address
-ADDR_MX_CCW_ANGLE_LIMIT     = 8
 ADDR_MX_TORQUE_ENABLE       = 24
 ADDR_MX_D                   = 26
 ADDR_MX_I                   = 27
 ADDR_MX_P                   = 28
-ADDR_MX_GOAL_POSITION       = 30
 ADDR_MX_MOVING_SPEED        = 32
 ADDR_MX_TORQUE_LIMIT        = 34
 ADDR_MX_PRESENT_POSITION    = 36
-ADDR_MX_PRESENT_SPEED       = 38
-ADDR_MX_MOVING              = 46
-ADDR_MX_GOAL_ACCELERATION   = 73
 
 # Protocol version
 PROTOCOL_VERSION            = 1.0
@@ -76,7 +44,6 @@ DEVICENAME                  = 'COM5'
 
 TORQUE_ENABLE               = 1
 TORQUE_DISABLE              = 0
-DXL_MOVING_STATUS_THRESHOLD = 5
 DXL_MAXIMUM_TORQUE          = 800
 DXL_D                       = 254
 DXL_I                       = 0
@@ -84,7 +51,7 @@ DXL_P                       = 20
 DXL_MAXIMUM_SPEED           = 500 
 DXL_MINIMUM_SPEED           = 15  
 
-class Position:
+class Draw:
     def __init__(self):        
 
         # Initialize PortHandler instance
@@ -143,10 +110,10 @@ class Position:
         #P
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_P,DXL_P)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_P,DXL_P)
-
+        #zero position
         self.xStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
         self.yStartPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
-
+        #global position
         self.x = 0
         self.y = 0
 
@@ -155,45 +122,54 @@ class Position:
 
         self.xRecord = self.xStartPosition
         self.yRecord = self.yStartPosition
-
+        #for counting rotations
         self.xLastPosition = self.xStartPosition
         self.yLastPosition = self.yStartPosition
 
-    def goto(self,toX,toY):         
+    def goto(self,x,y): 
+        #to prevent using diferent values        
         xPosition = self.x
-        xInitialDistance = abs(toX-xPosition)
         yPosition = self.y
-        yInitialDistance = abs(toY-yPosition)
-
-        while toX - 100 > xPosition or toX + 100 < xPosition or toY - 100 > yPosition or toY + 100 < yPosition:
-            xPosition, xRelativePosition, xRotationPosition, yPosition, yRelativePosition,yRotationPosition = self.getPosition()
-            self.setRotations(xRotationPosition,toX > xPosition,yRotationPosition, toY > yPosition)
-            self.setVelocity(toX,xPosition,xInitialDistance,toY,yPosition,yInitialDistance) 
-            print(toX - 100 > xPosition, toX + 100 < xPosition, toY - 100 > yPosition, toY + 100 < yPosition,toX - 100 > xPosition or toX + 100 < xPosition or toY - 100 > yPosition or toY + 100 < yPosition)
+        #for approch behavior
+        xInitialDistance = abs(x-xPosition)        
+        yInitialDistance = abs(y-yPosition)
+        #while not at goal
+        while x - 100 > xPosition or x + 100 < xPosition or y - 100 > yPosition or y + 100 < yPosition:
+            #get current position
+            xPosition, xRotationPosition, yPosition, yRotationPosition = self.getPosition()
+            #update rotations
+            self.setRotations(xRotationPosition,x > xPosition,yRotationPosition, y > yPosition)
+            self.setVelocity(x,xPosition,xInitialDistance,y,yPosition,yInitialDistance) 
+            print(x - 100 > xPosition, x + 100 < xPosition, y - 100 > yPosition, y + 100 < yPosition,x - 100 > xPosition or x + 100 < xPosition or y - 100 > yPosition or y + 100 < yPosition)
             print("----------------------------------------")
             self.xLastPosition = xRotationPosition
             self.yLastPosition = yRotationPosition
+        #stop servos once at goal
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,0)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,0)
-        self.x, xRelativePosition, self.xLastPosition, self.y, yRelativePosition, self.yLastPosition = self.getPosition()
+        #update self.x and self.y to adjust for time delay between last read, and servos stopping
+        self.x, self.xLastPosition, self.y, self.yLastPosition = self.getPosition()
 
     def getPosition(self):
+        #get servos local position
         xRotationPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
         yRotationPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
-
+        #position if start position were 0
         xRelativePosition = int(round((xRotationPosition - self.xStartPosition)/10)*10)
         yRelativePosition = int(round((yRotationPosition - self.yStartPosition)/10)*10)
         if xRelativePosition < 0:
             xRelativePosition = xRelativePosition + 4095
         if yRelativePosition < 0:
             yRelativePosition = yRelativePosition + 4095
+        #global position
         xPosition = xRelativePosition + self.xRotations*4095
         yPosition = yRelativePosition + self.yRotations*4095
-        print(xPosition, xRelativePosition, xRotationPosition, yPosition, yRelativePosition,yRotationPosition)
-        return xPosition, xRelativePosition, xRotationPosition, yPosition, yRelativePosition,yRotationPosition
+        print(xPosition, xRotationPosition, yPosition, yRotationPosition)
+        return xPosition, xRotationPosition, yPosition, yRotationPosition
 
     def setRotations(self,xRotationPosition,xForward,yRotationPosition,yForward):
         print(self.xLastPosition,xRotationPosition,self.xStartPosition, self.xRotations,xForward,self.yLastPosition,yRotationPosition,self.yStartPosition,self.yRotations,yForward)
+        #allow cushion for error in reading position
         if xForward and (xRotationPosition-self.xLastPosition > 5):
             if (xRotationPosition > self.xStartPosition and self.xStartPosition > self.xLastPosition) or (self.xStartPosition > self.xLastPosition and self.xLastPosition > xRotationPosition):
                 self.xRotations = self.xRotations + 1
@@ -210,22 +186,25 @@ class Position:
 
         print(self.xLastPosition,xRotationPosition,self.xStartPosition, self.xRotations,xForward,self.yLastPosition,yRotationPosition,self.yStartPosition,self.yRotations,yForward)
 
-    def setVelocity(self,toX,xPosition,xInitialDistance,toY,yPosition,yInitialDistance):
+    def setVelocity(self,x,xPosition,xInitialDistance,y,yPosition,yInitialDistance):
         ratiox = .5
         ratioy = .5
-
-        speed = max(min(abs(toX-xPosition)/xInitialDistance,abs(toY-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
-        print(abs(toX-xPosition)/xInitialDistance,abs(toY-yPosition)/yInitialDistance,speed)
-        
-        ratiox = abs((xPosition - toX))/(abs(yPosition - toY) + abs(xPosition - toX))
+        #velocity must be between DXL_MINIMUM_SPEED and DXL_MAXIMUM_SPEED
+        #takes the servo closest to its goal to determin the total velocity shared
+        velocity = max(min(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
+        print(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance,speed)
+        #how far x has to go compared to y
+        ratiox = abs((xPosition - x))/(abs(yPosition - y) + abs(xPosition - x))
         ratioy = 1 - ratiox
-        
-        xVelocity = ratiox*speed
-        yVelocity = ratioy*speed
-        if xPosition > toX:
+        #velocity split between the two based on ration of distance to go
+        xVelocity = ratiox*velocity
+        yVelocity = ratioy*velocity
+        #if the velocity is supposed to negative add 1023 since the last bit ditermins the direction
+        if xPosition > x:
             xVelocity = xVelocity + 1023
-        if yPosition > toY:
+        if yPosition > y:
             yVelocity = yVelocity + 1023
+        #set velocities
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(xVelocity))
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(yVelocity))
         print(ratiox,xVelocity,ratioy,yVelocity)
@@ -238,15 +217,5 @@ class Position:
         # Close port
         self.portHandler.closePort()
 
-test = Position()
-xmax = 18000
-ymax = 12000
-inp = input()
-test.getPosition()
-while "q" not in inp:    
-    loc = inp.find(",")
-    xval = int(inp[0:loc])
-    yval = int(inp[loc+1:])
-    resolution = 20
-    test.goto(xval,yval)
-    inp = input()
+#xmax = 18000
+#ymax = 12000
