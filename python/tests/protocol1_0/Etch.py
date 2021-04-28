@@ -32,6 +32,7 @@ ADDR_MX_P                   = 28
 ADDR_MX_MOVING_SPEED        = 32
 ADDR_MX_TORQUE_LIMIT        = 34
 ADDR_MX_PRESENT_POSITION    = 36
+ADDR_MX_GOAL_ACCELERATION   = 73
 
 # Protocol version
 PROTOCOL_VERSION            = 1.0
@@ -48,10 +49,10 @@ DXL_MAXIMUM_TORQUE          = 800
 DXL_D                       = 254
 DXL_I                       = 0
 DXL_P                       = 20
-DXL_MAXIMUM_SPEED           = 500 
+DXL_MAXIMUM_SPEED           = 50 
 DXL_MINIMUM_SPEED           = 15  
 
-class Draw:
+class Etch:
     def __init__(self):        
 
         # Initialize PortHandler instance
@@ -101,6 +102,9 @@ class Draw:
         self.packetHandler.write2ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
         self.packetHandler.write2ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_TORQUE_LIMIT, DXL_MAXIMUM_TORQUE)
 
+        #self.packetHandler.write1ByteTxRx(self.portHandler, HORIZONTAL, ADDR_MX_GOAL_ACCELERATION, 1)
+        #self.packetHandler.write1ByteTxRx(self.portHandler, VERTICAL, ADDR_MX_GOAL_ACCELERATION, 1)
+
         #D
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_D,DXL_D)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_D,DXL_D)
@@ -123,34 +127,55 @@ class Draw:
         self.xRecord = self.xStartPosition
         self.yRecord = self.yStartPosition
         #for counting rotations
-        self.xLastPosition = self.xStartPosition
-        self.yLastPosition = self.yStartPosition
+        self.xLastPosition = 0
+        self.yLastPosition = 0
+
+    def checkInBounds(self,x,y):
+        if x > 18000 or y > 12000 or x < 0 or y < 0:
+            return False
+        else:
+            return True
 
     def goto(self,x,y): 
+        self.x, xRotationPosition, self.y, yRotationPosition = self.getPosition(False)
+        self.xLastPosition = self.x
+        self.yLastPosition = self.y
         #to prevent using diferent values        
         xPosition = self.x
         yPosition = self.y
+
+        if x > xPosition:
+            self.xLastPosition = xPosition - 5
+        else:
+            self.xLastPosition = xPosition + 5
+        if y > yPosition:
+            self.yLastPosition = yPosition - 5
+        else:
+            self.yLastPosition = yPosition + 5
         #for approch behavior
         xInitialDistance = abs(x-xPosition)        
         yInitialDistance = abs(y-yPosition)
+
+        GIVE = 50        
         #while not at goal
-        while x - 100 > xPosition or x + 100 < xPosition or y - 100 > yPosition or y + 100 < yPosition:
+        while x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition:
             #get current position
-            xPosition, xRotationPosition, yPosition, yRotationPosition = self.getPosition()
+            xPosition, xRotationPosition, yPosition, yRotationPosition = self.getPosition(True)
             #update rotations
-            self.setRotations(xRotationPosition,x > xPosition,yRotationPosition, y > yPosition)
+            change = self.setRotations(xPosition,x > xPosition,yPosition, y > yPosition)
+            if change:
+                xPosition, xRotationPosition, yPosition, yRotationPosition = self.getPosition(True)
             self.setVelocity(x,xPosition,xInitialDistance,y,yPosition,yInitialDistance) 
             print(x - 100 > xPosition, x + 100 < xPosition, y - 100 > yPosition, y + 100 < yPosition,x - 100 > xPosition or x + 100 < xPosition or y - 100 > yPosition or y + 100 < yPosition)
             print("----------------------------------------")
-            self.xLastPosition = xRotationPosition
-            self.yLastPosition = yRotationPosition
+            self.xLastPosition = xPosition
+            self.yLastPosition = yPosition
         #stop servos once at goal
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,0)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,0)
-        #update self.x and self.y to adjust for time delay between last read, and servos stopping
-        self.x, self.xLastPosition, self.y, self.yLastPosition = self.getPosition()
+        #update self.x and self.y to adjust for time delay between last read, and servos stopping       
 
-    def getPosition(self):
+    def getPosition(self, prnt):
         #get servos local position
         xRotationPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_PRESENT_POSITION)
         yRotationPosition, dont, care = self.packetHandler.read2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_PRESENT_POSITION)
@@ -164,27 +189,35 @@ class Draw:
         #global position
         xPosition = xRelativePosition + self.xRotations*4095
         yPosition = yRelativePosition + self.yRotations*4095
-        print(xPosition, xRotationPosition, yPosition, yRotationPosition)
+        if prnt:
+            print(xPosition,":", xRotationPosition, yPosition,":", yRotationPosition)
         return xPosition, xRotationPosition, yPosition, yRotationPosition
 
-    def setRotations(self,xRotationPosition,xForward,yRotationPosition,yForward):
-        print(self.xLastPosition,xRotationPosition,self.xStartPosition, self.xRotations,xForward,self.yLastPosition,yRotationPosition,self.yStartPosition,self.yRotations,yForward)
+    def setRotations(self,xPosition,xForward,yPosition,yForward):
         #allow cushion for error in reading position
-        if xForward and (xRotationPosition-self.xLastPosition > 5):
-            if (xRotationPosition > self.xStartPosition and self.xStartPosition > self.xLastPosition) or (self.xStartPosition > self.xLastPosition and self.xLastPosition > xRotationPosition):
+        change = False
+        xdiff = abs(xPosition - self.xLastPosition)
+        ydiff = abs(yPosition - self.yLastPosition)
+        if xForward :
+            if (xdiff > 3000):
                 self.xRotations = self.xRotations + 1
-        elif (not xForward) and (xRotationPosition-self.xLastPosition < -5) :
-            if (xRotationPosition < self.xStartPosition and self.xStartPosition < self.xLastPosition) or (self.xStartPosition < self.xLastPosition and self.xLastPosition < xRotationPosition):
+                change = True
+        else :
+            if (xdiff > 3000):
                 self.xRotations = self.xRotations - 1
+                change = True
         
-        if yForward and (yRotationPosition-self.yLastPosition > 5):
-            if (yRotationPosition > self.yStartPosition and self.yStartPosition > self.yLastPosition) or (self.yStartPosition > self.yLastPosition and self.yLastPosition > yRotationPosition):
+        if yForward:
+            if (ydiff > 3000):
                 self.yRotations = self.yRotations + 1
-        elif (not yForward) and (yRotationPosition-self.yLastPosition < -5) :
-            if (yRotationPosition < self.yStartPosition and self.yStartPosition < self.yLastPosition) or (self.yStartPosition < self.yLastPosition and self.yLastPosition < yRotationPosition):
+                change = True
+        else:
+            if (ydiff > 3000):
                 self.yRotations = self.yRotations - 1
+                change = True
 
-        print(self.xLastPosition,xRotationPosition,self.xStartPosition, self.xRotations,xForward,self.yLastPosition,yRotationPosition,self.yStartPosition,self.yRotations,yForward)
+        print(self.xLastPosition,xPosition,self.xStartPosition, self.xRotations,xForward,self.yLastPosition,yPosition,self.yStartPosition,self.yRotations,yForward)
+        return change
 
     def setVelocity(self,x,xPosition,xInitialDistance,y,yPosition,yInitialDistance):
         ratiox = .5
@@ -192,7 +225,7 @@ class Draw:
         #velocity must be between DXL_MINIMUM_SPEED and DXL_MAXIMUM_SPEED
         #takes the servo closest to its goal to determin the total velocity shared
         velocity = max(min(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
-        print(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance,speed)
+        print(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance,velocity)
         #how far x has to go compared to y
         ratiox = abs((xPosition - x))/(abs(yPosition - y) + abs(xPosition - x))
         ratioy = 1 - ratiox
