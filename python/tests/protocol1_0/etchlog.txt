@@ -1,0 +1,1354 @@
+got to: ( 2857.5 , 2415.0 )
+position( 0 , 4085 ) rotpos( 2701 , 1997 ) startpos( 2705 , 2003 )
+diff( 0 , 4085 ) rots( 0 , -1 ) forward( True , False )
+position( 0 , -10 ) rotpos( 2701 , 1997 ) startpos( 2705 , 2003 )
+vel 50.0
+ratio( 0.5409370563180312 , 0.45906294368196876 ) vels( 27.046852815901563 , 22.953147184098437 )
+True False True False True
+----------------------------------------
+position( 0 , -4095 ) rotpos( 2702 , 1998 ) startpos( 2705 , 2003 )
+diff( 0 , 4085 ) rots( 0 , 0 ) forward( True , True )
+position( 40 , 10 ) rotpos( 2745 , 2013 ) startpos( 2705 , 2003 )
+vel 50.0
+ratio( 0.5429928741092637 , 0.45700712589073633 ) vels( 27.149643705463184 , 22.850356294536816 )
+True False True False True
+----------------------------------------
+position( 140 , 90 ) rotpos( 2840 , 2095 ) startpos( 2705 , 2003 )
+diff( 140 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 47.55030621172354
+ratio( 0.5389191869112543 , 0.4610808130887457 ) vels( 25.625772361003214 , 21.924533850720323 )
+True False True False True
+----------------------------------------
+position( 240 , 180 ) rotpos( 2949 , 2182 ) startpos( 2705 , 2003 )
+diff( 100 , 90 ) rots( 0 , 0 ) forward( True , True )
+vel 45.800524934383205
+ratio( 0.5394126738794436 , 0.4605873261205564 ) vels( 24.705383619937773 , 21.09514131444543 )
+True False True False True
+----------------------------------------
+position( 340 , 260 ) rotpos( 3045 , 2263 ) startpos( 2705 , 2003 )
+diff( 100 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 44.050743657042865
+ratio( 0.5387907972177635 , 0.46120920278223654 ) vels( 23.734135293013463 , 20.316608364029403 )
+True False True False True
+----------------------------------------
+position( 420 , 340 ) rotpos( 3130 , 2346 ) startpos( 2705 , 2003 )
+diff( 80 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 42.650918635170605
+ratio( 0.5401662049861495 , 0.45983379501385047 ) vels( 23.03858485833315 , 19.612333776837456 )
+True False True False True
+----------------------------------------
+position( 520 , 420 ) rotpos( 3222 , 2421 ) startpos( 2705 , 2003 )
+diff( 100 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 40.90113735783027
+ratio( 0.5395268320830929 , 0.46047316791690707 ) vels( 22.067261067265612 , 18.83387629056466 )
+True False True False True
+----------------------------------------
+position( 610 , 500 ) rotpos( 3316 , 2502 ) startpos( 2705 , 2003 )
+diff( 90 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 39.326334208223976
+ratio( 0.5399399399399399 , 0.46006006006006006 ) vels( 21.233858530446458 , 18.092475677777518 )
+True False True False True
+----------------------------------------
+position( 700 , 570 ) rotpos( 3402 , 2573 ) startpos( 2705 , 2003 )
+diff( 90 , 70 ) rots( 0 , 0 ) forward( True , True )
+vel 37.75153105861767
+ratio( 0.5390381011867583 , 0.4609618988132417 ) vels( 20.349513618730203 , 17.40201743988747 )
+True False True False True
+----------------------------------------
+position( 790 , 640 ) rotpos( 3491 , 2648 ) startpos( 2705 , 2003 )
+diff( 90 , 70 ) rots( 0 , 0 ) forward( True , True )
+vel 36.176727909011376
+ratio( 0.5380611581001952 , 0.46193884189980483 ) vels( 19.465292114998313 , 16.711435794013063 )
+True False True False True
+----------------------------------------
+position( 860 , 710 ) rotpos( 3566 , 2712 ) startpos( 2705 , 2003 )
+diff( 70 , 70 ) rots( 0 , 0 ) forward( True , True )
+vel 34.951881014873145
+ratio( 0.5395003376097232 , 0.46049966239027684 ) vels( 18.856551607618936 , 16.09532940725421 )
+True False True False True
+----------------------------------------
+position( 940 , 780 ) rotpos( 3645 , 2778 ) startpos( 2705 , 2003 )
+diff( 80 , 70 ) rots( 0 , 0 ) forward( True , True )
+vel 33.55205599300087
+ratio( 0.5397607318789585 , 0.46023926812104154 ) vels( 18.110082298825944 , 15.441973694174926 )
+True False True False True
+----------------------------------------
+position( 1000 , 830 ) rotpos( 3709 , 2837 ) startpos( 2705 , 2003 )
+diff( 60 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 32.502187226596675
+ratio( 0.5395787944807553 , 0.4604212055192447 ) vels( 17.537491001714837 , 14.964696224881838 )
+True False True False True
+----------------------------------------
+position( 1080 , 900 ) rotpos( 3783 , 2901 ) startpos( 2705 , 2003 )
+diff( 80 , 70 ) rots( 0 , 0 ) forward( True , True )
+vel 31.10236220472441
+ratio( 0.5398633257403189 , 0.4601366742596811 ) vels( 16.791024698222518 , 14.311337506501893 )
+True False True False True
+----------------------------------------
+position( 1140 , 950 ) rotpos( 3847 , 2954 ) startpos( 2705 , 2003 )
+diff( 60 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 30.05249343832021
+ratio( 0.5396700706991359 , 0.46032992930086414 ) vels( 16.218431258543582 , 13.834062179776625 )
+True False True False True
+----------------------------------------
+position( 1210 , 1010 ) rotpos( 3914 , 3010 ) startpos( 2705 , 2003 )
+diff( 70 , 60 ) rots( 0 , 0 ) forward( True , True )
+vel 28.827646544181977
+ratio( 0.5397215397215397 , 0.4602784602784603 ) vels( 15.558901779374219 , 13.268744764807758 )
+True False True False True
+----------------------------------------
+position( 1270 , 1050 ) rotpos( 3971 , 3057 ) startpos( 2705 , 2003 )
+diff( 60 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 27.77777777777778
+ratio( 0.5376799322607959 , 0.4623200677392041 ) vels( 14.935553673910999 , 12.84222410386678 )
+True False True False True
+----------------------------------------
+position( 1330 , 1100 ) rotpos( 4033 , 3105 ) startpos( 2705 , 2003 )
+diff( 60 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 26.72790901137358
+ratio( 0.5373790677220757 , 0.46262093227792433 ) vels( 14.3630188266924 , 12.36489018468118 )
+True False True False True
+----------------------------------------
+position( 1380 , 1160 ) rotpos( 4086 , 3162 ) startpos( 2705 , 2003 )
+diff( 50 , 60 ) rots( 0 , 0 ) forward( True , True )
+vel 25.853018372703414
+ratio( 0.5407136322049405 , 0.4592863677950595 ) vels( 13.979079467765523 , 11.87393890493789 )
+True False True False True
+----------------------------------------
+position( 1435 , 1200 ) rotpos( 42 , 3205 ) startpos( 2705 , 2003 )
+diff( 55 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 24.89063867016623
+ratio( 0.5393364928909953 , 0.4606635071090047 ) vels( 13.42442976618444 , 11.466208903981789 )
+True False True False True
+----------------------------------------
+position( 1485 , 1240 ) rotpos( 93 , 3245 ) startpos( 2705 , 2003 )
+diff( 50 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 24.015748031496063
+ratio( 0.5387634936211972 , 0.46123650637880276 ) vels( 12.93880831137521 , 11.076939720120853 )
+True False True False True
+----------------------------------------
+position( 1525 , 1290 ) rotpos( 139 , 3296 ) startpos( 2705 , 2003 )
+diff( 40 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 23.31583552055993
+ratio( 0.5422177009155646 , 0.45778229908443535 ) vels( 12.642258730883462 , 10.673576789676467 )
+True False True False True
+----------------------------------------
+position( 1585 , 1330 ) rotpos( 198 , 3336 ) startpos( 2705 , 2003 )
+diff( 60 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 22.26596675415573
+ratio( 0.5397667020148462 , 0.4602332979851538 ) vels( 12.01842744206285 , 10.247539312092881 )
+True False True False True
+----------------------------------------
+position( 1635 , 1370 ) rotpos( 242 , 3376 ) startpos( 2705 , 2003 )
+diff( 50 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 21.391076115485564
+ratio( 0.5391400220507166 , 0.46085997794928335 ) vels( 11.532785248591445 , 9.85829086689412 )
+True False True False True
+----------------------------------------
+position( 1675 , 1410 ) rotpos( 283 , 3412 ) startpos( 2705 , 2003 )
+diff( 40 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 20.69116360454943
+ratio( 0.5405714285714286 , 0.4594285714285714 ) vels( 11.185051868516435 , 9.506111736032995 )
+True False True False True
+----------------------------------------
+position( 1725 , 1440 ) rotpos( 336 , 3447 ) startpos( 2705 , 2003 )
+diff( 50 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 19.816272965879264
+ratio( 0.5373665480427047 , 0.4626334519572953 ) vels( 10.64860219874651 , 9.167670767132755 )
+True False True False True
+----------------------------------------
+position( 1765 , 1480 ) rotpos( 374 , 3485 ) startpos( 2705 , 2003 )
+diff( 40 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 19.11636045494313
+ratio( 0.5388409371146733 , 0.4611590628853267 ) vels( 10.30067758176344 , 8.815682873179691 )
+True False True False True
+----------------------------------------
+position( 1805 , 1510 ) rotpos( 416 , 3516 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 18.416447944007
+ratio( 0.5376756066411239 , 0.4623243933588761 ) vels( 9.902074820468643 , 8.514373123538357 )
+True False True False True
+----------------------------------------
+position( 1835 , 1540 ) rotpos( 441 , 3546 ) startpos( 2705 , 2003 )
+diff( 30 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 17.8915135608049
+ratio( 0.538866930171278 , 0.46113306982872204 ) vels( 9.641144988628726 , 8.250368572176173 )
+True False True False True
+----------------------------------------
+position( 1875 , 1570 ) rotpos( 486 , 3575 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 17.191601049868765
+ratio( 0.5376196990424077 , 0.4623803009575923 ) vels( 9.242543382487586 , 7.9490576673811795 )
+True False True False True
+----------------------------------------
+position( 1915 , 1610 ) rotpos( 527 , 3610 ) startpos( 2705 , 2003 )
+diff( 40 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 16.49168853893263
+ratio( 0.5393419170243204 , 0.46065808297567956 ) vels( 8.89465891155594 , 7.597029627376692 )
+True False True False True
+----------------------------------------
+position( 1955 , 1640 ) rotpos( 561 , 3641 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15.791776027996502
+ratio( 0.5380029806259314 , 0.46199701937406856 ) vels( 8.49602257243925 , 7.295753455557251 )
+True False True False True
+----------------------------------------
+position( 1975 , 1650 ) rotpos( 590 , 3656 ) startpos( 2705 , 2003 )
+diff( 20 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15.441819772528435
+ratio( 0.5356600910470409 , 0.46433990895295907 ) vels( 8.271566585284578 , 7.170253187243857 )
+True False True False True
+----------------------------------------
+position( 2015 , 1690 ) rotpos( 622 , 3697 ) startpos( 2705 , 2003 )
+diff( 40 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5374800637958532 , 0.4625199362041468 ) vels( 8.062200956937799 , 6.937799043062202 )
+True False True False True
+----------------------------------------
+position( 2055 , 1720 ) rotpos( 661 , 3722 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5358931552587646 , 0.4641068447412354 ) vels( 8.03839732888147 , 6.9616026711185315 )
+True False True False True
+----------------------------------------
+position( 2075 , 1740 ) rotpos( 690 , 3744 ) startpos( 2705 , 2003 )
+diff( 20 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5368782161234992 , 0.4631217838765008 ) vels( 8.053173241852488 , 6.9468267581475125 )
+True False True False True
+----------------------------------------
+position( 2095 , 1760 ) rotpos( 704 , 3768 ) startpos( 2705 , 2003 )
+diff( 20 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5379188712522046 , 0.4620811287477954 ) vels( 8.06878306878307 , 6.931216931216931 )
+True False True False True
+----------------------------------------
+position( 2145 , 1780 ) rotpos( 758 , 3786 ) startpos( 2705 , 2003 )
+diff( 50 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5287569573283859 , 0.4712430426716141 ) vels( 7.9313543599257885 , 7.0686456400742115 )
+True False True False True
+----------------------------------------
+position( 2175 , 1810 ) rotpos( 782 , 3816 ) startpos( 2705 , 2003 )
+diff( 30 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5300970873786408 , 0.4699029126213592 ) vels( 7.951456310679612 , 7.048543689320388 )
+True False True False True
+----------------------------------------
+position( 2195 , 1840 ) rotpos( 808 , 3838 ) startpos( 2705 , 2003 )
+diff( 20 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5353535353535354 , 0.46464646464646464 ) vels( 8.030303030303031 , 6.96969696969697 )
+True False True False True
+----------------------------------------
+position( 2235 , 1860 ) rotpos( 846 , 3867 ) startpos( 2705 , 2003 )
+diff( 40 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5286624203821656 , 0.4713375796178344 ) vels( 7.929936305732484 , 7.070063694267516 )
+True False True False True
+----------------------------------------
+position( 2245 , 1900 ) rotpos( 858 , 3898 ) startpos( 2705 , 2003 )
+diff( 10 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5432372505543237 , 0.4567627494456763 ) vels( 8.148558758314856 , 6.851441241685144 )
+True False True False True
+----------------------------------------
+position( 2285 , 1910 ) rotpos( 894 , 3917 ) startpos( 2705 , 2003 )
+diff( 40 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.531322505800464 , 0.46867749419953597 ) vels( 7.96983758700696 , 7.03016241299304 )
+True False True False True
+----------------------------------------
+position( 2325 , 1940 ) rotpos( 932 , 3941 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5285359801488834 , 0.47146401985111663 ) vels( 7.92803970223325 , 7.07196029776675 )
+True False True False True
+----------------------------------------
+position( 2345 , 1960 ) rotpos( 956 , 3968 ) startpos( 2705 , 2003 )
+diff( 20 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5297157622739018 , 0.4702842377260982 ) vels( 7.945736434108527 , 7.054263565891473 )
+True False True False True
+----------------------------------------
+position( 2365 , 2000 ) rotpos( 974 , 3998 ) startpos( 2705 , 2003 )
+diff( 20 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5426997245179064 , 0.4573002754820936 ) vels( 8.140495867768596 , 6.859504132231404 )
+True False True False True
+----------------------------------------
+position( 2405 , 2020 ) rotpos( 1013 , 4026 ) startpos( 2705 , 2003 )
+diff( 40 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5339233038348082 , 0.46607669616519176 ) vels( 8.008849557522124 , 6.991150442477877 )
+True False True False True
+----------------------------------------
+position( 2435 , 2040 ) rotpos( 1045 , 4040 ) startpos( 2705 , 2003 )
+diff( 30 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5297805642633229 , 0.4702194357366771 ) vels( 7.946708463949843 , 7.053291536050157 )
+True False True False True
+----------------------------------------
+position( 2465 , 2080 ) rotpos( 1077 , 4080 ) startpos( 2705 , 2003 )
+diff( 30 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5395189003436426 , 0.4604810996563574 ) vels( 8.092783505154639 , 6.907216494845361 )
+True False True False True
+----------------------------------------
+position( 2495 , 2090 ) rotpos( 1107 , 4094 ) startpos( 2705 , 2003 )
+diff( 30 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5272727272727272 , 0.4727272727272728 ) vels( 7.909090909090908 , 7.090909090909092 )
+True False True False True
+----------------------------------------
+position( 2515 , 2125 ) rotpos( 1123 , 32 ) startpos( 2705 , 2003 )
+diff( 20 , 35 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.541501976284585 , 0.45849802371541504 ) vels( 8.122529644268774 , 6.877470355731226 )
+True False True False True
+----------------------------------------
+position( 2555 , 2155 ) rotpos( 1169 , 58 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5377777777777778 , 0.4622222222222222 ) vels( 8.066666666666666 , 6.933333333333333 )
+True False True False True
+----------------------------------------
+position( 2575 , 2165 ) rotpos( 1189 , 74 ) startpos( 2705 , 2003 )
+diff( 20 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5305164319248826 , 0.4694835680751174 ) vels( 7.957746478873239 , 7.042253521126761 )
+True False True False True
+----------------------------------------
+position( 2615 , 2195 ) rotpos( 1230 , 107 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5243243243243243 , 0.4756756756756757 ) vels( 7.864864864864865 , 7.135135135135135 )
+True False True False True
+----------------------------------------
+position( 2635 , 2225 ) rotpos( 1242 , 130 ) startpos( 2705 , 2003 )
+diff( 20 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5393939393939394 , 0.4606060606060606 ) vels( 8.090909090909092 , 6.909090909090908 )
+True False True False True
+----------------------------------------
+position( 2655 , 2245 ) rotpos( 1267 , 151 ) startpos( 2705 , 2003 )
+diff( 20 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5436241610738255 , 0.4563758389261745 ) vels( 8.154362416107382 , 6.845637583892618 )
+True False True False True
+----------------------------------------
+position( 2705 , 2275 ) rotpos( 1319 , 181 ) startpos( 2705 , 2003 )
+diff( 50 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5213675213675214 , 0.4786324786324786 ) vels( 7.820512820512821 , 7.179487179487179 )
+True False True False True
+----------------------------------------
+position( 2725 , 2305 ) rotpos( 1337 , 212 ) startpos( 2705 , 2003 )
+diff( 20 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5463917525773195 , 0.45360824742268047 ) vels( 8.195876288659793 , 6.804123711340207 )
+True False True False True
+----------------------------------------
+position( 2775 , 2315 ) rotpos( 1380 , 224 ) startpos( 2705 , 2003 )
+diff( 50 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.4520547945205479 , 0.547945205479452 ) vels( 6.780821917808219 , 8.21917808219178 )
+False False False False False
+----------------------------------------
+position( 2785 , 2345 ) rotpos( 1396 , 257 ) startpos( 2705 , 2003 )
+diff( 10 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5087719298245614 , 0.49122807017543857 ) vels( 7.631578947368421 , 7.368421052631579 )
+False False False False False
+----------------------------------------
+position( 2815 , 2375 ) rotpos( 1423 , 283 ) startpos( 2705 , 2003 )
+diff( 30 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5151515151515151 , 0.48484848484848486 ) vels( 7.727272727272727 , 7.272727272727273 )
+False False False False False
+----------------------------------------
+position( 2835 , 2405 ) rotpos( 1448 , 310 ) startpos( 2705 , 2003 )
+diff( 20 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 10.384615384615385 , 4.615384615384616 )
+False False False False False
+----------------------------------------
+got to: ( 2970.0 , 2415.0 )
+position( 2875 , 2435 ) rotpos( 1486 , 345 ) startpos( 2705 , 2003 )
+diff( 40 , 30 ) rots( 0 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.8260869565217391 , 0.17391304347826086 ) vels( 41.30434782608695 , 1032.695652173913 )
+False False False False False
+----------------------------------------
+position( 2915 , 2435 ) rotpos( 1528 , 345 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( True , False )
+vel 28.947368421052634
+ratio( 0.7333333333333333 , 0.2666666666666667 ) vels( 21.228070175438596 , 1031.719298245614 )
+False False False False False
+----------------------------------------
+position( 3075 , 2435 ) rotpos( 1686 , 344 ) startpos( 2705 , 2003 )
+diff( 160 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 50.0
+ratio( 0.84 , 0.16000000000000003 ) vels( 1066.0 , 1032.0 )
+False True False False True
+----------------------------------------
+position( 3125 , 2425 ) rotpos( 1732 , 331 ) startpos( 2705 , 2003 )
+diff( 50 , 10 ) rots( 0 , 0 ) forward( False , False )
+vel 25.0
+ratio( 0.9393939393939394 , 0.06060606060606055 ) vels( 1047.4848484848485 , 1025.5151515151515 )
+False True False False True
+----------------------------------------
+position( 2995 , 2415 ) rotpos( 1610 , 319 ) startpos( 2705 , 2003 )
+diff( 130 , 10 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 1.0 , 0.0 ) vels( 1039.0 , 0.0 )
+False False False False False
+----------------------------------------
+got to: ( 2970.0 , 2520.0 )
+position( 2925 , 2415 ) rotpos( 1532 , 318 ) startpos( 2705 , 2003 )
+diff( 70 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 45.65217391304348
+ratio( 0.3 , 0.7 ) vels( 13.695652173913043 , 31.95652173913043 )
+False False True False True
+----------------------------------------
+position( 2925 , 2415 ) rotpos( 1532 , 318 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 45.65217391304348
+ratio( 0.3 , 0.7 ) vels( 13.695652173913043 , 31.95652173913043 )
+False False True False True
+----------------------------------------
+position( 2935 , 2505 ) rotpos( 1549 , 411 ) startpos( 2705 , 2003 )
+diff( 10 , 90 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.7 , 0.30000000000000004 ) vels( 10.5 , 4.500000000000001 )
+False False False False False
+----------------------------------------
+position( 2965 , 2595 ) rotpos( 1576 , 508 ) startpos( 2705 , 2003 )
+diff( 30 , 90 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.0625 , 0.9375 ) vels( 0.9375 , 1038.0625 )
+False False False False False
+----------------------------------------
+position( 2985 , 2595 ) rotpos( 1598 , 508 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 16.666666666666664
+ratio( 0.16666666666666666 , 0.8333333333333334 ) vels( 1026.7777777777778 , 1037.888888888889 )
+False False False False False
+----------------------------------------
+position( 2985 , 2595 ) rotpos( 1599 , 504 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 16.666666666666664
+ratio( 0.16666666666666666 , 0.8333333333333334 ) vels( 1026.7777777777778 , 1037.888888888889 )
+False False False False False
+----------------------------------------
+position( 2985 , 2555 ) rotpos( 1599 , 466 ) startpos( 2705 , 2003 )
+diff( 0 , 40 ) rots( 0 , 0 ) forward( False , False )
+vel 15.217391304347828
+ratio( 0.3 , 0.7 ) vels( 1028.5652173913043 , 1034.6521739130435 )
+False False False False False
+----------------------------------------
+position( 2985 , 2515 ) rotpos( 1599 , 419 ) startpos( 2705 , 2003 )
+diff( 0 , 40 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.75 , 0.25 ) vels( 1035.25 , 3.75 )
+False False False False False
+----------------------------------------
+got to: ( 3082.5 , 2460.0 )
+position( 2985 , 2475 ) rotpos( 1598 , 387 ) startpos( 2705 , 2003 )
+diff( 0 , 40 ) rots( 0 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.8666666666666667 , 0.1333333333333333 ) vels( 43.333333333333336 , 1030.6666666666667 )
+False False False False False
+----------------------------------------
+position( 2995 , 2475 ) rotpos( 1610 , 387 ) startpos( 2705 , 2003 )
+diff( 10 , 0 ) rots( 0 , 0 ) forward( True , False )
+vel 44.871794871794876
+ratio( 0.8536585365853658 , 0.14634146341463417 ) vels( 38.30519074421514 , 1030.5666041275797 )
+False False False False False
+----------------------------------------
+position( 3155 , 2465 ) rotpos( 1763 , 374 ) startpos( 2705 , 2003 )
+diff( 160 , 10 ) rots( 0 , 0 ) forward( False , False )
+vel 16.666666666666664
+ratio( 0.9354838709677419 , 0.06451612903225812 ) vels( 1039.5913978494623 , 1025.0752688172042 )
+False False False False False
+----------------------------------------
+position( 3255 , 2455 ) rotpos( 1866 , 360 ) startpos( 2705 , 2003 )
+diff( 100 , 10 ) rots( 0 , 0 ) forward( False , True )
+vel 16.666666666666664
+ratio( 0.971830985915493 , 0.028169014084507005 ) vels( 1040.1971830985915 , 0.46948356807511665 )
+False True False False True
+----------------------------------------
+position( 3235 , 2455 ) rotpos( 1845 , 358 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 16.666666666666664
+ratio( 0.9682539682539683 , 0.031746031746031744 ) vels( 1040.1375661375662 , 0.529100529100529 )
+False True False False True
+----------------------------------------
+position( 3185 , 2455 ) rotpos( 1797 , 358 ) startpos( 2705 , 2003 )
+diff( 50 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 16.666666666666664
+ratio( 0.9534883720930233 , 0.046511627906976716 ) vels( 1039.891472868217 , 0.7751937984496118 )
+False True False False True
+----------------------------------------
+position( 3135 , 2455 ) rotpos( 1747 , 358 ) startpos( 2705 , 2003 )
+diff( 50 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 16.666666666666664
+ratio( 0.9130434782608695 , 0.08695652173913049 ) vels( 1039.2173913043478 , 1.4492753623188412 )
+False False False False False
+----------------------------------------
+position( 3075 , 2455 ) rotpos( 1682 , 358 ) startpos( 2705 , 2003 )
+diff( 60 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.6 , 0.4 ) vels( 9.0 , 6.0 )
+False False False False False
+----------------------------------------
+got to: ( 3195.0 , 2490.0 )
+position( 3035 , 2455 ) rotpos( 1640 , 358 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 47.05882352941176
+ratio( 0.8205128205128205 , 0.17948717948717952 ) vels( 38.61236802413273 , 8.446455505279035 )
+True False False False True
+----------------------------------------
+position( 3035 , 2455 ) rotpos( 1640 , 358 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 47.05882352941176
+ratio( 0.8205128205128205 , 0.17948717948717952 ) vels( 38.61236802413273 , 8.446455505279035 )
+True False False False True
+----------------------------------------
+position( 3175 , 2455 ) rotpos( 1781 , 358 ) startpos( 2705 , 2003 )
+diff( 140 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.36363636363636365 , 0.6363636363636364 ) vels( 5.454545454545455 , 9.545454545454545 )
+False False False False False
+----------------------------------------
+position( 3285 , 2455 ) rotpos( 1894 , 368 ) startpos( 2705 , 2003 )
+diff( 110 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 26.47058823529412
+ratio( 0.72 , 0.28 ) vels( 1043.0588235294117 , 7.411764705882354 )
+False False False False False
+----------------------------------------
+position( 3285 , 2495 ) rotpos( 1894 , 400 ) startpos( 2705 , 2003 )
+diff( 0 , 40 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.9473684210526315 , 0.052631578947368474 ) vels( 1038.2105263157894 , 1024.7894736842106 )
+False False False False False
+----------------------------------------
+position( 3255 , 2495 ) rotpos( 1866 , 407 ) startpos( 2705 , 2003 )
+diff( 30 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.9230769230769231 , 0.07692307692307687 ) vels( 1037.8461538461538 , 1025.1538461538462 )
+False False False False False
+----------------------------------------
+position( 3215 , 2495 ) rotpos( 1828 , 407 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.8 , 0.19999999999999996 ) vels( 1036.0 , 1027.0 )
+False False False False False
+----------------------------------------
+got to: ( 3307.5 , 2535.0 )
+position( 3165 , 2495 ) rotpos( 1774 , 407 ) startpos( 2705 , 2003 )
+diff( 50 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.7808219178082192 , 0.2191780821917808 ) vels( 39.04109589041096 , 10.95890410958904 )
+True False False False True
+----------------------------------------
+position( 3165 , 2495 ) rotpos( 1775 , 408 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.7808219178082192 , 0.2191780821917808 ) vels( 39.04109589041096 , 10.95890410958904 )
+True False False False True
+----------------------------------------
+position( 3285 , 2545 ) rotpos( 1896 , 453 ) startpos( 2705 , 2003 )
+diff( 120 , 50 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 10.384615384615385 , 1028.6153846153845 )
+False False False False False
+----------------------------------------
+got to: ( 3420.0 , 2580.0 )
+got to: ( 3532.5 , 2625.0 )
+position( 3415 , 2565 ) rotpos( 2029 , 472 ) startpos( 2705 , 2003 )
+diff( 130 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.6619718309859155 , 0.3380281690140845 ) vels( 33.098591549295776 , 16.901408450704224 )
+True False False False True
+----------------------------------------
+position( 3435 , 2565 ) rotpos( 2048 , 474 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 41.48936170212766
+ratio( 0.6190476190476191 , 0.38095238095238093 ) vels( 25.6838905775076 , 15.80547112462006 )
+False False False False False
+----------------------------------------
+position( 3575 , 2635 ) rotpos( 2190 , 547 ) startpos( 2705 , 2003 )
+diff( 140 , 70 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.8095238095238095 , 0.19047619047619047 ) vels( 1036.142857142857 , 1026.857142857143 )
+False False False False False
+----------------------------------------
+position( 3645 , 2675 ) rotpos( 2257 , 580 ) startpos( 2705 , 2003 )
+diff( 70 , 40 ) rots( 0 , 0 ) forward( False , False )
+vel 41.66666666666667
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 1052.8461538461538 , 1036.820512820513 )
+False True False False True
+----------------------------------------
+position( 3625 , 2675 ) rotpos( 2231 , 581 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 39.361702127659576
+ratio( 0.6491228070175439 , 0.3508771929824561 ) vels( 1049.5505785740947 , 1037.8111235535648 )
+False False False False False
+----------------------------------------
+position( 3535 , 2675 ) rotpos( 2149 , 580 ) startpos( 2705 , 2003 )
+diff( 90 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.047619047619047616 , 0.9523809523809523 ) vels( 1024.7142857142858 , 1038.2857142857142 )
+False False False False False
+----------------------------------------
+position( 3465 , 2655 ) rotpos( 2074 , 561 ) startpos( 2705 , 2003 )
+diff( 70 , 20 ) rots( 0 , 0 ) forward( True , False )
+vel 25.0
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 17.307692307692307 , 1031.6923076923076 )
+False False False False False
+----------------------------------------
+position( 3465 , 2595 ) rotpos( 2075 , 505 ) startpos( 2705 , 2003 )
+diff( 0 , 60 ) rots( 0 , 0 ) forward( True , True )
+vel 25.0
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 17.307692307692307 , 7.6923076923076925 )
+False False False False False
+----------------------------------------
+position( 3495 , 2595 ) rotpos( 2103 , 503 ) startpos( 2705 , 2003 )
+diff( 30 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15.957446808510639
+ratio( 0.5555555555555556 , 0.4444444444444444 ) vels( 8.865248226950355 , 7.092198581560283 )
+False False False False False
+----------------------------------------
+position( 3535 , 2595 ) rotpos( 2148 , 504 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.07692307692307693 , 0.9230769230769231 ) vels( 1025.1538461538462 , 13.846153846153847 )
+False False False False False
+----------------------------------------
+position( 3555 , 2595 ) rotpos( 2165 , 504 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.42857142857142855 , 0.5714285714285714 ) vels( 1030.4285714285713 , 8.571428571428571 )
+False False False False False
+----------------------------------------
+position( 3555 , 2615 ) rotpos( 2165 , 519 ) startpos( 2705 , 2003 )
+diff( 0 , 20 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 1034.3846153846155 , 4.615384615384616 )
+False False False False False
+----------------------------------------
+got to: ( 3645.0 , 2670.0 )
+position( 3555 , 2635 ) rotpos( 2163 , 545 ) startpos( 2705 , 2003 )
+diff( 0 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.72 , 0.28 ) vels( 36.0 , 14.000000000000002 )
+False False False False False
+----------------------------------------
+position( 3565 , 2645 ) rotpos( 2171 , 550 ) startpos( 2705 , 2003 )
+diff( 10 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 35.714285714285715
+ratio( 0.7619047619047619 , 0.23809523809523814 ) vels( 27.210884353741495 , 8.503401360544219 )
+False False False False False
+----------------------------------------
+position( 3685 , 2705 ) rotpos( 2293 , 613 ) startpos( 2705 , 2003 )
+diff( 120 , 60 ) rots( 0 , 0 ) forward( False , False )
+vel 22.22222222222222
+ratio( 0.5333333333333333 , 0.4666666666666667 ) vels( 1035.851851851852 , 1034.3703703703704 )
+False False False False False
+----------------------------------------
+position( 3765 , 2715 ) rotpos( 2375 , 619 ) startpos( 2705 , 2003 )
+diff( 80 , 10 ) rots( 0 , 0 ) forward( False , False )
+vel 64.28571428571429
+ratio( 0.7272727272727273 , 0.2727272727272727 ) vels( 1070.7532467532467 , 1041.5324675324675 )
+False True False False True
+----------------------------------------
+position( 3715 , 2715 ) rotpos( 2328 , 618 ) startpos( 2705 , 2003 )
+diff( 50 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 38.88888888888889
+ratio( 0.6086956521739131 , 0.3913043478260869 ) vels( 1047.6714975845412 , 1039.2173913043478 )
+False False False False False
+----------------------------------------
+position( 3585 , 2685 ) rotpos( 2191 , 590 ) startpos( 2705 , 2003 )
+diff( 130 , 30 ) rots( 0 , 0 ) forward( True , False )
+vel 21.428571428571427
+ratio( 0.8 , 0.19999999999999996 ) vels( 17.142857142857142 , 1028.2857142857142 )
+False False False False False
+----------------------------------------
+position( 3525 , 2635 ) rotpos( 2132 , 544 ) startpos( 2705 , 2003 )
+diff( 60 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.7741935483870968 , 0.22580645161290325 ) vels( 38.70967741935484 , 11.290322580645162 )
+True False False False True
+----------------------------------------
+position( 3565 , 2635 ) rotpos( 2177 , 544 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 44.44444444444444
+ratio( 0.6956521739130435 , 0.30434782608695654 ) vels( 30.917874396135264 , 13.526570048309178 )
+False False False False False
+----------------------------------------
+position( 3695 , 2635 ) rotpos( 2310 , 545 ) startpos( 2705 , 2003 )
+diff( 130 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 27.77777777777778
+ratio( 0.5882352941176471 , 0.4117647058823529 ) vels( 1040.3398692810458 , 11.437908496732026 )
+False False False False False
+----------------------------------------
+position( 3785 , 2645 ) rotpos( 2394 , 557 ) startpos( 2705 , 2003 )
+diff( 90 , 10 ) rots( 0 , 0 ) forward( False , True )
+vel 35.714285714285715
+ratio( 0.8484848484848485 , 0.1515151515151515 ) vels( 1054.3030303030303 , 5.411255411255411 )
+False True False False True
+----------------------------------------
+position( 3735 , 2695 ) rotpos( 2345 , 604 ) startpos( 2705 , 2003 )
+diff( 50 , 50 ) rots( 0 , 0 ) forward( False , False )
+vel 35.714285714285715
+ratio( 0.782608695652174 , 0.21739130434782605 ) vels( 1051.9503105590063 , 1031.7639751552795 )
+False False False False False
+----------------------------------------
+position( 3635 , 2695 ) rotpos( 2242 , 605 ) startpos( 2705 , 2003 )
+diff( 100 , 0 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.2857142857142857 , 0.7142857142857143 ) vels( 4.285714285714286 , 1034.7142857142858 )
+False False False False False
+----------------------------------------
+got to: ( 3757.5 , 2715.0 )
+position( 3575 , 2695 ) rotpos( 2181 , 604 ) startpos( 2705 , 2003 )
+diff( 60 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.9012345679012346 , 0.09876543209876543 ) vels( 45.06172839506173 , 4.938271604938271 )
+True False False False True
+----------------------------------------
+position( 3575 , 2695 ) rotpos( 2181 , 604 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.9012345679012346 , 0.09876543209876543 ) vels( 45.06172839506173 , 4.938271604938271 )
+True False False False True
+----------------------------------------
+position( 3735 , 2695 ) rotpos( 2348 , 604 ) startpos( 2705 , 2003 )
+diff( 160 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5294117647058824 , 0.47058823529411764 ) vels( 7.9411764705882355 , 7.0588235294117645 )
+False False False False False
+----------------------------------------
+got to: ( 3870.0 , 2760.0 )
+position( 3885 , 2695 ) rotpos( 2493 , 605 ) startpos( 2705 , 2003 )
+diff( 150 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 50.0
+ratio( 0.1875 , 0.8125 ) vels( 1033.375 , 40.625 )
+False False False False False
+----------------------------------------
+position( 3885 , 2735 ) rotpos( 2493 , 640 ) startpos( 2705 , 2003 )
+diff( 0 , 40 ) rots( 0 , 0 ) forward( False , True )
+vel 19.230769230769234
+ratio( 0.375 , 0.625 ) vels( 1031.2115384615386 , 12.01923076923077 )
+False False False False False
+----------------------------------------
+got to: ( 3982.5 , 2805.0 )
+position( 3875 , 2875 ) rotpos( 2480 , 786 ) startpos( 2705 , 2003 )
+diff( 10 , 140 ) rots( 0 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.6056338028169014 , 0.3943661971830986 ) vels( 30.28169014084507 , 1043.718309859155 )
+True False False False True
+----------------------------------------
+position( 3875 , 2875 ) rotpos( 2480 , 785 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.6056338028169014 , 0.3943661971830986 ) vels( 30.28169014084507 , 1043.718309859155 )
+True False False False True
+----------------------------------------
+position( 3975 , 2855 ) rotpos( 2580 , 763 ) startpos( 2705 , 2003 )
+diff( 100 , 20 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.13043478260869565 , 0.8695652173913043 ) vels( 1.9565217391304348 , 1037.0434782608695 )
+False False False False False
+----------------------------------------
+position( 4075 , 2795 ) rotpos( 2688 , 704 ) startpos( 2705 , 2003 )
+diff( 100 , 60 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.9024390243902439 , 0.09756097560975607 ) vels( 1037.5365853658536 , 1.463414634146341 )
+False False False False False
+----------------------------------------
+position( 4075 , 2765 ) rotpos( 2688 , 677 ) startpos( 2705 , 2003 )
+diff( 0 , 30 ) rots( 0 , 0 ) forward( False , True )
+vel 28.57142857142857
+ratio( 0.6981132075471698 , 0.30188679245283023 ) vels( 1043.946091644205 , 8.62533692722372 )
+False False False False False
+----------------------------------------
+position( 4035 , 2765 ) rotpos( 2646 , 676 ) startpos( 2705 , 2003 )
+diff( 40 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 24.418604651162788
+ratio( 0.5675675675675675 , 0.43243243243243246 ) vels( 1037.8592080452545 , 10.559396605908233 )
+False False False False False
+----------------------------------------
+position( 3985 , 2765 ) rotpos( 2598 , 677 ) startpos( 2705 , 2003 )
+diff( 50 , 0 ) rots( 0 , 0 ) forward( False , True )
+vel 15
+ratio( 0.058823529411764705 , 0.9411764705882353 ) vels( 1024.8823529411766 , 14.117647058823529 )
+False False False False False
+----------------------------------------
+position( 3955 , 2775 ) rotpos( 2560 , 686 ) startpos( 2705 , 2003 )
+diff( 30 , 10 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.4782608695652174 , 0.5217391304347826 ) vels( 7.173913043478261 , 7.826086956521739 )
+False False False False False
+----------------------------------------
+position( 3955 , 2825 ) rotpos( 2560 , 734 ) startpos( 2705 , 2003 )
+diff( 0 , 50 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.5789473684210527 , 0.42105263157894735 ) vels( 8.68421052631579 , 1030.3157894736842 )
+False False False False False
+----------------------------------------
+position( 3955 , 2835 ) rotpos( 2560 , 743 ) startpos( 2705 , 2003 )
+diff( 0 , 10 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.4782608695652174 , 0.5217391304347826 ) vels( 7.173913043478261 , 1031.8260869565217 )
+False False False False False
+----------------------------------------
+position( 3965 , 2835 ) rotpos( 2575 , 743 ) startpos( 2705 , 2003 )
+diff( 10 , 0 ) rots( 0 , 0 ) forward( True , False )
+vel 15
+ratio( 0.3684210526315789 , 0.631578947368421 ) vels( 5.526315789473684 , 1033.4736842105262 )
+False False False False False
+----------------------------------------
+position( 3985 , 2835 ) rotpos( 2594 , 742 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.07692307692307693 , 0.9230769230769231 ) vels( 1025.1538461538462 , 1037.8461538461538 )
+False False False False False
+----------------------------------------
+position( 3995 , 2825 ) rotpos( 2610 , 732 ) startpos( 2705 , 2003 )
+diff( 10 , 10 ) rots( 0 , 0 ) forward( False , False )
+vel 15
+ratio( 0.38461538461538464 , 0.6153846153846154 ) vels( 1029.7692307692307 , 1033.2307692307693 )
+False False False False False
+----------------------------------------
+got to: ( 4095.0 , 2835.0 )
+position( 3995 , 2775 ) rotpos( 2610 , 679 ) startpos( 2705 , 2003 )
+diff( 0 , 50 ) rots( 0 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.625 , 0.375 ) vels( 31.25 , 18.75 )
+False False False False False
+----------------------------------------
+position( 4005 , 2775 ) rotpos( 2619 , 679 ) startpos( 2705 , 2003 )
+diff( 10 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 45.0
+ratio( 0.6 , 0.4 ) vels( 27.0 , 18.0 )
+False False False False False
+----------------------------------------
+position( 50 , 2795 ) rotpos( 2756 , 699 ) startpos( 2705 , 2003 )
+diff( 3955 , 20 ) rots( 1 , 0 ) forward( True , True )
+position( 4195 , 2815 ) rotpos( 2801 , 722 ) startpos( 2705 , 2003 )
+vel 33.33333333333333
+ratio( 0.7142857142857143 , 0.2857142857142857 ) vels( 1047.8095238095239 , 9.523809523809522 )
+False False False False False
+----------------------------------------
+position( 4275 , 2875 ) rotpos( 2885 , 778 ) startpos( 2705 , 2003 )
+diff( 80 , 80 ) rots( 1 , 0 ) forward( False , False )
+vel 33.33333333333333
+ratio( 0.8181818181818182 , 0.18181818181818177 ) vels( 1051.2727272727273 , 1030.060606060606 )
+False True False False True
+----------------------------------------
+position( 4205 , 2895 ) rotpos( 2811 , 805 ) startpos( 2705 , 2003 )
+diff( 70 , 20 ) rots( 1 , 0 ) forward( False , False )
+vel 50.0
+ratio( 0.6470588235294118 , 0.3529411764705882 ) vels( 1056.3529411764705 , 1041.6470588235295 )
+False True False False True
+----------------------------------------
+position( 4095 , 2895 ) rotpos( 2703 , 805 ) startpos( 2705 , 2003 )
+diff( 110 , 0 ) rots( 1 , 0 ) forward( False , False )
+vel 15
+ratio( 0.0 , 1.0 ) vels( 0.0 , 1039.0 )
+False False False False False
+----------------------------------------
+position( 8090 , 2875 ) rotpos( 2607 , 779 ) startpos( 2705 , 2003 )
+diff( 3995 , 20 ) rots( 0 , 0 ) forward( False , False )
+position( 3995 , 2855 ) rotpos( 2607 , 764 ) startpos( 2705 , 2003 )
+vel 33.33333333333333
+ratio( 0.7142857142857143 , 0.2857142857142857 ) vels( 23.809523809523807 , 1033.5238095238096 )
+False False False False False
+----------------------------------------
+position( 3995 , 2795 ) rotpos( 2608 , 707 ) startpos( 2705 , 2003 )
+diff( 0 , 80 ) rots( 0 , 0 ) forward( True , True )
+vel 33.33333333333333
+ratio( 0.7142857142857143 , 0.2857142857142857 ) vels( 23.809523809523807 , 9.523809523809522 )
+False False False False False
+----------------------------------------
+position( 4075 , 2775 ) rotpos( 2682 , 678 ) startpos( 2705 , 2003 )
+diff( 80 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.25 , 0.75 ) vels( 3.75 , 11.25 )
+False False False False False
+----------------------------------------
+position( 50 , 2775 ) rotpos( 2754 , 679 ) startpos( 2705 , 2003 )
+diff( 4025 , 0 ) rots( 1 , 0 ) forward( True , True )
+position( 4145 , 2785 ) rotpos( 2755 , 690 ) startpos( 2705 , 2003 )
+vel 25.0
+ratio( 0.45454545454545453 , 0.5454545454545454 ) vels( 1035.3636363636363 , 13.636363636363635 )
+False False False False False
+----------------------------------------
+position( 4145 , 2795 ) rotpos( 2755 , 708 ) startpos( 2705 , 2003 )
+diff( 0 , 20 ) rots( 1 , 0 ) forward( False , True )
+vel 25.0
+ratio( 0.5555555555555556 , 0.4444444444444444 ) vels( 1037.888888888889 , 11.11111111111111 )
+False False False False False
+----------------------------------------
+position( 4125 , 2845 ) rotpos( 2737 , 751 ) startpos( 2705 , 2003 )
+diff( 20 , 50 ) rots( 1 , 0 ) forward( False , False )
+vel 15
+ratio( 0.75 , 0.25 ) vels( 1035.25 , 1027.75 )
+False False False False False
+----------------------------------------
+position( 4095 , 2885 ) rotpos( 2702 , 792 ) startpos( 2705 , 2003 )
+diff( 30 , 40 ) rots( 1 , 0 ) forward( False , False )
+vel 15
+ratio( 0.0 , 1.0 ) vels( 0.0 , 1039.0 )
+False False False False False
+----------------------------------------
+position( 8160 , 2885 ) rotpos( 2672 , 792 ) startpos( 2705 , 2003 )
+diff( 4065 , 0 ) rots( 0 , 0 ) forward( False , False )
+position( 4065 , 2885 ) rotpos( 2672 , 791 ) startpos( 2705 , 2003 )
+vel 15.0
+ratio( 0.375 , 0.625 ) vels( 5.625 , 1033.375 )
+False False False False False
+----------------------------------------
+position( 4065 , 2855 ) rotpos( 2671 , 766 ) startpos( 2705 , 2003 )
+diff( 0 , 30 ) rots( 0 , 0 ) forward( True , False )
+vel 15.0
+ratio( 0.6 , 0.4 ) vels( 9.0 , 1030.0 )
+False False False False False
+----------------------------------------
+position( 4065 , 2825 ) rotpos( 2672 , 732 ) startpos( 2705 , 2003 )
+diff( 0 , 30 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.75 , 0.25 ) vels( 11.25 , 3.75 )
+False False False False False
+----------------------------------------
+position( 4085 , 2805 ) rotpos( 2695 , 711 ) startpos( 2705 , 2003 )
+diff( 20 , 20 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.25 , 0.75 ) vels( 3.75 , 11.25 )
+False False False False False
+----------------------------------------
+position( 20 , 2805 ) rotpos( 2725 , 711 ) startpos( 2705 , 2003 )
+diff( 4065 , 0 ) rots( 1 , 0 ) forward( True , True )
+position( 4115 , 2805 ) rotpos( 2725 , 712 ) startpos( 2705 , 2003 )
+vel 15
+ratio( 0.4 , 0.6 ) vels( 1030.0 , 9.0 )
+False False False False False
+----------------------------------------
+position( 4125 , 2815 ) rotpos( 2736 , 723 ) startpos( 2705 , 2003 )
+diff( 10 , 10 ) rots( 1 , 0 ) forward( False , True )
+vel 15.0
+ratio( 0.6 , 0.4 ) vels( 1033.0 , 6.0 )
+False False False False False
+----------------------------------------
+position( 4125 , 2845 ) rotpos( 2735 , 752 ) startpos( 2705 , 2003 )
+diff( 0 , 30 ) rots( 1 , 0 ) forward( False , False )
+vel 15
+ratio( 0.75 , 0.25 ) vels( 1035.25 , 1027.75 )
+False False False False False
+----------------------------------------
+position( 4105 , 2845 ) rotpos( 2713 , 753 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 1 , 0 ) forward( False , False )
+vel 15
+ratio( 0.5 , 0.5 ) vels( 1031.5 , 1031.5 )
+False False False False False
+----------------------------------------
+got to: ( 4207.5 , 2880.0 )
+position( 8160 , 2845 ) rotpos( 2671 , 753 ) startpos( 2705 , 2003 )
+diff( 4055 , 0 ) rots( 0 , 0 ) forward( False , True )
+position( 4065 , 2845 ) rotpos( 2671 , 753 ) startpos( 2705 , 2003 )
+vel 15
+ratio( 0.8028169014084507 , 0.19718309859154926 ) vels( 12.042253521126762 , 2.957746478873239 )
+True False False False True
+----------------------------------------
+position( 4065 , 2845 ) rotpos( 2671 , 753 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.8028169014084507 , 0.19718309859154926 ) vels( 12.042253521126762 , 2.957746478873239 )
+True False False False True
+----------------------------------------
+position( 4085 , 2845 ) rotpos( 2696 , 753 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 15
+ratio( 0.7777777777777778 , 0.2222222222222222 ) vels( 11.666666666666666 , 3.333333333333333 )
+True False False False True
+----------------------------------------
+position( 20 , 2845 ) rotpos( 2728 , 753 ) startpos( 2705 , 2003 )
+diff( 4065 , 0 ) rots( 1 , 0 ) forward( True , True )
+position( 4135 , 2855 ) rotpos( 2749 , 762 ) startpos( 2705 , 2003 )
+vel 15
+ratio( 0.6744186046511628 , 0.32558139534883723 ) vels( 10.116279069767442 , 4.883720930232559 )
+False False False False False
+----------------------------------------
+position( 4175 , 2855 ) rotpos( 2790 , 768 ) startpos( 2705 , 2003 )
+diff( 40 , 10 ) rots( 1 , 0 ) forward( True , True )
+vel 15
+ratio( 0.5652173913043478 , 0.4347826086956522 ) vels( 8.478260869565217 , 6.521739130434783 )
+False False False False False
+----------------------------------------
+position( 4215 , 2875 ) rotpos( 2824 , 786 ) startpos( 2705 , 2003 )
+diff( 40 , 20 ) rots( 1 , 0 ) forward( False , True )
+vel 15
+ratio( 0.6 , 0.4 ) vels( 1033.0 , 6.0 )
+False False False False False
+----------------------------------------
+got to: ( 4320.0 , 2925.0 )
+position( 4235 , 2905 ) rotpos( 2846 , 810 ) startpos( 2705 , 2003 )
+diff( 20 , 30 ) rots( 1 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.8095238095238095 , 0.19047619047619047 ) vels( 40.476190476190474 , 9.523809523809524 )
+False False False False False
+----------------------------------------
+position( 4255 , 2905 ) rotpos( 2863 , 812 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 38.23529411764706
+ratio( 0.7647058823529411 , 0.23529411764705888 ) vels( 29.238754325259514 , 8.996539792387544 )
+False False False False False
+----------------------------------------
+position( 4425 , 2965 ) rotpos( 3035 , 869 ) startpos( 2705 , 2003 )
+diff( 170 , 60 ) rots( 1 , 0 ) forward( False , False )
+vel 61.76470588235294
+ratio( 0.7241379310344828 , 0.27586206896551724 ) vels( 1068.7261663286004 , 1041.0385395537526 )
+False True False False True
+----------------------------------------
+position( 4495 , 2965 ) rotpos( 3105 , 875 ) startpos( 2705 , 2003 )
+diff( 70 , 0 ) rots( 1 , 0 ) forward( False , False )
+vel 100.0
+ratio( 0.813953488372093 , 0.18604651162790697 ) vels( 1105.3953488372092 , 1042.6046511627908 )
+False True False False True
+----------------------------------------
+position( 4295 , 2955 ) rotpos( 2904 , 864 ) startpos( 2705 , 2003 )
+diff( 200 , 10 ) rots( 1 , 0 ) forward( True , False )
+vel 15
+ratio( 0.45454545454545453 , 0.5454545454545454 ) vels( 6.818181818181818 , 1032.1818181818182 )
+False False False False False
+----------------------------------------
+position( 8110 , 2925 ) rotpos( 2625 , 830 ) startpos( 2705 , 2003 )
+diff( 3815 , 30 ) rots( 0 , 0 ) forward( False , False )
+position( 4045 , 2905 ) rotpos( 2656 , 816 ) startpos( 2705 , 2003 )
+vel 15
+ratio( 1.0 , 0.0 ) vels( 15.0 , 0.0 )
+True False False False True
+----------------------------------------
+position( 4055 , 2885 ) rotpos( 2662 , 793 ) startpos( 2705 , 2003 )
+diff( 10 , 40 ) rots( 0 , 0 ) forward( True , True )
+vel 100.0
+ratio( 0.8688524590163934 , 0.1311475409836066 ) vels( 86.88524590163934 , 13.11475409836066 )
+True False False False True
+----------------------------------------
+position( 90 , 2885 ) rotpos( 2793 , 793 ) startpos( 2705 , 2003 )
+diff( 3965 , 0 ) rots( 1 , 0 ) forward( True , True )
+position( 4415 , 2885 ) rotpos( 3021 , 794 ) startpos( 2705 , 2003 )
+vel 55.88235294117647
+ratio( 0.7037037037037037 , 0.2962962962962963 ) vels( 1063.3246187363834 , 16.55773420479303 )
+False False False False False
+----------------------------------------
+position( 4625 , 2905 ) rotpos( 3236 , 815 ) startpos( 2705 , 2003 )
+diff( 210 , 20 ) rots( 1 , 0 ) forward( False , True )
+vel 50.0
+ratio( 0.9384615384615385 , 0.06153846153846154 ) vels( 1070.923076923077 , 3.076923076923077 )
+False True False False True
+----------------------------------------
+position( 4455 , 2945 ) rotpos( 3070 , 856 ) startpos( 2705 , 2003 )
+diff( 170 , 40 ) rots( 1 , 0 ) forward( False , False )
+vel 50.0
+ratio( 0.8709677419354839 , 0.12903225806451613 ) vels( 1067.5483870967741 , 1030.4516129032259 )
+False True False False True
+----------------------------------------
+position( 4275 , 2945 ) rotpos( 2880 , 856 ) startpos( 2705 , 2003 )
+diff( 180 , 0 ) rots( 1 , 0 ) forward( True , False )
+vel 26.47058823529412
+ratio( 0.6923076923076923 , 0.3076923076923077 ) vels( 18.325791855203622 , 1032.1447963800906 )
+False False False False False
+----------------------------------------
+position( 4155 , 2945 ) rotpos( 2766 , 856 ) startpos( 2705 , 2003 )
+diff( 120 , 0 ) rots( 1 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.8918918918918919 , 0.10810810810810811 ) vels( 44.5945945945946 , 1029.4054054054054 )
+True False False False True
+----------------------------------------
+position( 4235 , 2945 ) rotpos( 2843 , 854 ) startpos( 2705 , 2003 )
+diff( 80 , 0 ) rots( 1 , 0 ) forward( True , False )
+vel 50.0
+ratio( 0.8095238095238095 , 0.19047619047619047 ) vels( 40.476190476190474 , 1033.5238095238096 )
+False False False False False
+----------------------------------------
+position( 4395 , 2935 ) rotpos( 3010 , 842 ) startpos( 2705 , 2003 )
+diff( 160 , 10 ) rots( 1 , 0 ) forward( False , False )
+vel 25.0
+ratio( 0.8823529411764706 , 0.11764705882352944 ) vels( 1046.0588235294117 , 1026.9411764705883 )
+False False False False False
+----------------------------------------
+position( 4515 , 2905 ) rotpos( 3127 , 817 ) startpos( 2705 , 2003 )
+diff( 120 , 30 ) rots( 1 , 0 ) forward( False , True )
+vel 50.0
+ratio( 0.9069767441860465 , 0.09302325581395354 ) vels( 1069.3488372093022 , 4.651162790697677 )
+False True False False True
+----------------------------------------
+position( 4425 , 2905 ) rotpos( 3036 , 817 ) startpos( 2705 , 2003 )
+diff( 90 , 0 ) rots( 1 , 0 ) forward( False , True )
+vel 50.0
+ratio( 0.84 , 0.16000000000000003 ) vels( 1066.0 , 8.000000000000002 )
+False True False False True
+----------------------------------------
+position( 4245 , 2905 ) rotpos( 2854 , 817 ) startpos( 2705 , 2003 )
+diff( 180 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 44.11764705882353
+ratio( 0.7894736842105263 , 0.21052631578947367 ) vels( 34.8297213622291 , 9.287925696594426 )
+False False False False False
+----------------------------------------
+position( 4135 , 2915 ) rotpos( 2741 , 820 ) startpos( 2705 , 2003 )
+diff( 110 , 10 ) rots( 1 , 0 ) forward( True , True )
+vel 25.0
+ratio( 0.9487179487179487 , 0.05128205128205132 ) vels( 23.717948717948715 , 1.282051282051283 )
+True False False False True
+----------------------------------------
+position( 4245 , 2915 ) rotpos( 2856 , 826 ) startpos( 2705 , 2003 )
+diff( 110 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 25.0
+ratio( 0.8823529411764706 , 0.11764705882352944 ) vels( 22.058823529411764 , 2.941176470588236 )
+False False False False False
+----------------------------------------
+position( 4335 , 2915 ) rotpos( 2942 , 828 ) startpos( 2705 , 2003 )
+diff( 90 , 0 ) rots( 1 , 0 ) forward( False , True )
+vel 15
+ratio( 0.6 , 0.4 ) vels( 1033.0 , 6.0 )
+False False False False False
+----------------------------------------
+got to: ( 4432.5 , 2970.0 )
+position( 4385 , 2925 ) rotpos( 2995 , 836 ) startpos( 2705 , 2003 )
+diff( 50 , 10 ) rots( 1 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.5135135135135135 , 0.4864864864864865 ) vels( 25.675675675675674 , 24.324324324324326 )
+False False False False False
+----------------------------------------
+position( 4395 , 2955 ) rotpos( 3002 , 862 ) startpos( 2705 , 2003 )
+diff( 10 , 30 ) rots( 1 , 0 ) forward( True , True )
+vel 16.666666666666664
+ratio( 0.7142857142857143 , 0.2857142857142857 ) vels( 11.904761904761903 , 4.761904761904761 )
+False False False False False
+----------------------------------------
+position( 4485 , 3045 ) rotpos( 3099 , 955 ) startpos( 2705 , 2003 )
+diff( 90 , 90 ) rots( 1 , 0 ) forward( False , False )
+vel 55.26315789473685
+ratio( 0.4117647058823529 , 0.5882352941176471 ) vels( 1046.7554179566564 , 1056.5077399380805 )
+False False False False False
+----------------------------------------
+position( 4495 , 3045 ) rotpos( 3105 , 954 ) startpos( 2705 , 2003 )
+diff( 10 , 0 ) rots( 1 , 0 ) forward( False , False )
+vel 65.78947368421053
+ratio( 0.45454545454545453 , 0.5454545454545454 ) vels( 1053.9043062200958 , 1059.8851674641148 )
+False False False False False
+----------------------------------------
+position( 4435 , 2945 ) rotpos( 3041 , 854 ) startpos( 2705 , 2003 )
+diff( 60 , 100 ) rots( 1 , 0 ) forward( False , True )
+vel 15
+ratio( 0.09090909090909091 , 0.9090909090909091 ) vels( 1025.3636363636363 , 13.636363636363637 )
+False False False False False
+----------------------------------------
+got to: ( 4545.0 , 3015.0 )
+position( 4355 , 2855 ) rotpos( 2966 , 768 ) startpos( 2705 , 2003 )
+diff( 80 , 90 ) rots( 1 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.5428571428571428 , 0.4571428571428572 ) vels( 27.142857142857142 , 22.857142857142858 )
+True False True False True
+----------------------------------------
+position( 4355 , 2855 ) rotpos( 2966 , 768 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.5428571428571428 , 0.4571428571428572 ) vels( 27.142857142857142 , 22.857142857142858 )
+True False True False True
+----------------------------------------
+position( 4455 , 2925 ) rotpos( 3063 , 836 ) startpos( 2705 , 2003 )
+diff( 100 , 70 ) rots( 1 , 0 ) forward( True , True )
+vel 23.684210526315788
+ratio( 0.5 , 0.5 ) vels( 11.842105263157894 , 11.842105263157894 )
+False False False False False
+----------------------------------------
+position( 4535 , 3015 ) rotpos( 3150 , 918 ) startpos( 2705 , 2003 )
+diff( 80 , 90 ) rots( 1 , 0 ) forward( True , False )
+vel 15
+ratio( 1.0 , 0.0 ) vels( 15.0 , 0.0 )
+False False False False False
+----------------------------------------
+got to: ( 4657.5 , 3060.0 )
+position( 4595 , 3035 ) rotpos( 3205 , 943 ) startpos( 2705 , 2003 )
+diff( 60 , 20 ) rots( 1 , 0 ) forward( True , True )
+vel 50.0
+ratio( 0.7142857142857143 , 0.2857142857142857 ) vels( 35.714285714285715 , 14.285714285714285 )
+False False False False False
+----------------------------------------
+position( 4615 , 3035 ) rotpos( 3227 , 947 ) startpos( 2705 , 2003 )
+diff( 20 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 34.0
+ratio( 0.6296296296296297 , 0.37037037037037035 ) vels( 21.40740740740741 , 12.592592592592592 )
+False False False False False
+----------------------------------------
+position( 4775 , 3105 ) rotpos( 3384 , 1009 ) startpos( 2705 , 2003 )
+diff( 160 , 70 ) rots( 1 , 0 ) forward( False , False )
+vel 90.0
+ratio( 0.7230769230769231 , 0.27692307692307694 ) vels( 1089.076923076923 , 1048.923076923077 )
+False True False False True
+----------------------------------------
+position( 4805 , 3135 ) rotpos( 3419 , 1040 ) startpos( 2705 , 2003 )
+diff( 30 , 30 ) rots( 1 , 0 ) forward( False , False )
+vel 118.0
+ratio( 0.6629213483146067 , 0.3370786516853933 ) vels( 1102.2247191011236 , 1063.7752808988764 )
+False True False False True
+----------------------------------------
+position( 4525 , 3055 ) rotpos( 3134 , 960 ) startpos( 2705 , 2003 )
+diff( 280 , 80 ) rots( 1 , 0 ) forward( True , True )
+vel 15
+ratio( 0.9636363636363636 , 0.036363636363636376 ) vels( 14.454545454545455 , 0.5454545454545456 )
+True False False False True
+----------------------------------------
+position( 4275 , 2955 ) rotpos( 2884 , 864 ) startpos( 2705 , 2003 )
+diff( 250 , 100 ) rots( 1 , 0 ) forward( True , True )
+vel 210.0
+ratio( 0.7846153846153846 , 0.2153846153846154 ) vels( 164.76923076923077 , 45.23076923076923 )
+True False True False True
+----------------------------------------
+position( 4455 , 2955 ) rotpos( 3063 , 868 ) startpos( 2705 , 2003 )
+diff( 180 , 0 ) rots( 1 , 0 ) forward( True , True )
+vel 162.0
+ratio( 0.6585365853658537 , 0.3414634146341463 ) vels( 106.6829268292683 , 55.3170731707317 )
+True False True False True
+----------------------------------------
+position( 5115 , 3135 ) rotpos( 3729 , 1046 ) startpos( 2705 , 2003 )
+diff( 660 , 180 ) rots( 1 , 0 ) forward( False , False )
+vel 150.0
+ratio( 0.8591549295774648 , 0.14084507042253525 ) vels( 1152.8732394366198 , 1045.1267605633802 )
+False True False False True
+----------------------------------------
+position( 5305 , 3305 ) rotpos( 3916 , 1215 ) startpos( 2705 , 2003 )
+diff( 190 , 170 ) rots( 1 , 0 ) forward( False , False )
+vel 490.00000000000006
+ratio( 0.7254901960784313 , 0.27450980392156865 ) vels( 1379.4901960784314 , 1158.5098039215686 )
+False True False True True
+----------------------------------------
+position( 4605 , 3135 ) rotpos( 3219 , 1039 ) startpos( 2705 , 2003 )
+diff( 700 , 170 ) rots( 1 , 0 ) forward( True , False )
+vel 42.0
+ratio( 0.4117647058823529 , 0.5882352941176471 ) vels( 17.294117647058822 , 1048.7058823529412 )
+False False False False False
+----------------------------------------
+position( 7960 , 2675 ) rotpos( 2472 , 585 ) startpos( 2705 , 2003 )
+diff( 3355 , 460 ) rots( 0 , 0 ) forward( False , True )
+position( 4065 , 2675 ) rotpos( 2675 , 580 ) startpos( 2705 , 2003 )
+vel 474.0
+ratio( 0.6061381074168798 , 0.3938618925831202 ) vels( 287.30946291560105 , 186.69053708439898 )
+True False True False True
+----------------------------------------
+position( 110 , 2725 ) rotpos( 2814 , 635 ) startpos( 2705 , 2003 )
+diff( 3955 , 50 ) rots( 1 , 0 ) forward( True , True )
+position( 4645 , 3105 ) rotpos( 3258 , 1014 ) startpos( 2705 , 2003 )
+vel 15
+ratio( 0.03597122302158273 , 0.9640287769784173 ) vels( 0.539568345323741 , 14.46043165467626 )
+False False True False True
+----------------------------------------
+position( 5475 , 3685 ) rotpos( 4081 , 1592 ) startpos( 2705 , 2003 )
+diff( 830 , 960 ) rots( 1 , 0 ) forward( False , False )
+vel 654.0
+ratio( 0.5667244367417678 , 0.43327556325823224 ) vels( 1394.637781629116 , 1307.362218370884 )
+False True False True True
+----------------------------------------
+position( 5325 , 3485 ) rotpos( 3936 , 1390 ) startpos( 2705 , 2003 )
+diff( 150 , 200 ) rots( 1 , 0 ) forward( False , False )
+vel 534.0
+ratio( 0.6109839816933639 , 0.3890160183066361 ) vels( 1350.2654462242563 , 1231.7345537757437 )
+False True False True True
+----------------------------------------
+position( 5125 , 2595 ) rotpos( 3738 , 507 ) startpos( 2705 , 2003 )
+diff( 200 , 890 ) rots( 1 , 0 ) forward( False , True )
+vel 374.0
+ratio( 0.5013404825737265 , 0.49865951742627346 ) vels( 1211.5013404825738 , 186.49865951742626 )
+False True True False True
+----------------------------------------
+position( 4185 , 2090 ) rotpos( 2793 , 4093 ) startpos( 2705 , 2003 )
+diff( 940 , 505 ) rots( 1 , 0 ) forward( True , True )
+vel 378.0
+ratio( 0.3275563258232236 , 0.6724436741767764 ) vels( 123.81629116117851 , 254.18370883882147 )
+True False True False True
+----------------------------------------
+position( 7850 , 2865 ) rotpos( 2367 , 775 ) startpos( 2705 , 2003 )
+diff( 3665 , 775 ) rots( 0 , 0 ) forward( False , True )
+position( 4075 , 3295 ) rotpos( 2689 , 1206 ) startpos( 2705 , 2003 )
+vel 390.0
+ratio( 0.7491961414790996 , 0.25080385852090037 ) vels( 292.18649517684884 , 97.81350482315115 )
+True False True False True
+----------------------------------------
+position( 520 , 60 ) rotpos( 3222 , 2058 ) startpos( 2705 , 2003 )
+diff( 3555 , 2805 ) rots( 1 , 0 ) forward( True , True )
+position( 5075 , 100 ) rotpos( 3690 , 2104 ) startpos( 2705 , 2003 )
+vel 334.0
+ratio( 0.12216532553035844 , 0.8778346744696416 ) vels( 1064.8032187271397 , 293.1967812728603 )
+False True True False True
+----------------------------------------
+position( 5880 , 720 ) rotpos( 393 , 2724 ) startpos( 2705 , 2003 )
+diff( 805 , 660 ) rots( 1 , 0 ) forward( False , True )
+vel 977.9999999999999
+ratio( 0.3431578947368421 , 0.6568421052631579 ) vels( 1359.6084210526315 , 642.3915789473683 )
+False True True False True
+----------------------------------------
+position( 5435 , 1840 ) rotpos( 4044 , 3842 ) startpos( 2705 , 2003 )
+diff( 445 , 1120 ) rots( 1 , 0 ) forward( False , True )
+vel 622.0
+ratio( 0.38923654568210264 , 0.6107634543178974 ) vels( 1266.1051314142678 , 379.8948685857322 )
+False True True False True
+----------------------------------------
+position( 4455 , 3045 ) rotpos( 3060 , 954 ) startpos( 2705 , 2003 )
+diff( 980 , 1205 ) rots( 1 , 0 ) forward( True , True )
+vel 30.0
+ratio( 0.9310344827586207 , 0.06896551724137934 ) vels( 27.93103448275862 , 2.06896551724138 )
+True False False False True
+----------------------------------------
+position( 7850 , 3875 ) rotpos( 2367 , 1784 ) startpos( 2705 , 2003 )
+diff( 3395 , 830 ) rots( 0 , 0 ) forward( False , False )
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+vel 1630.0
+ratio( 0.8001226241569589 , 0.1998773758430411 ) vels( 1304.199877375843 , 1349.800122624157 )
+True False False True True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 1780 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------
+position( 1395 , 2095 ) rotpos( 0 , 0 ) startpos( 2705 , 2003 )
+diff( 0 , 0 ) rots( 0 , 0 ) forward( True , True )
+vel 1930.0
+ratio( 0.7717327025428741 , 0.22826729745712593 ) vels( 1489.444115907747 , 440.55588409225305 )
+True False True False True
+----------------------------------------

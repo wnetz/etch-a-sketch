@@ -6,6 +6,7 @@
 import os
 import time
 import math
+import sys
 from dynamixel_sdk import *
 
 if os.name == 'nt':
@@ -41,7 +42,7 @@ PROTOCOL_VERSION            = 1.0
 HORIZONTAL                  = 0
 VERTICAL                    = 1
 BAUDRATE                    = 1000000
-DEVICENAME                  = 'COM5'
+DEVICENAME                  = 'COM3'
 
 TORQUE_ENABLE               = 1
 TORQUE_DISABLE              = 0
@@ -55,6 +56,7 @@ DXL_MINIMUM_SPEED           = 15
 class Etch:
     def __init__(self):        
 
+        self.sourceFile = open('C:/Users/wnetz/Documents/etch-a-sketch/python/tests/protocol1_0/etchlog.txt', 'w')
         # Initialize PortHandler instance
         # Set the port path
         # Get methods and members of PortHandlerLinux or PortHandlerWindows
@@ -131,7 +133,9 @@ class Etch:
         self.yLastPosition = 0
 
     def checkInBounds(self,x,y):
-        if x > 18000 or y > 12000 or x < 0 or y < 0:
+        xmax = 18000
+        ymax = 12000
+        if x > xmax or y > ymax or x < 0 or y < 0:
             return False
         else:
             return True
@@ -145,8 +149,9 @@ class Etch:
         #for approch behavior
         xInitialDistance = abs(x-xPosition)        
         yInitialDistance = abs(y-yPosition)
-
-        GIVE = 25        
+        if output:
+            print("got to: (",x,",",y,")",file = self.sourceFile)
+        GIVE = 50        
         #while not at goal
         while x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition:
             #get current position
@@ -161,8 +166,8 @@ class Etch:
                 do, nt, yPosition, care = self.getPosition(output)
             self.setVelocity(x,xPosition,xInitialDistance,y,yPosition,yInitialDistance,output) 
             if output:
-                print(x - 100 > xPosition, x + 100 < xPosition, y - 100 > yPosition, y + 100 < yPosition,x - 100 > xPosition or x + 100 < xPosition or y - 100 > yPosition or y + 100 < yPosition)
-                print("----------------------------------------")
+                print(x - GIVE > xPosition, x + GIVE < xPosition, y - GIVE > yPosition, y + GIVE < yPosition,x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition,file = self.sourceFile)
+                print("----------------------------------------",file = self.sourceFile)
             self.xLastPosition = xPosition
             self.yLastPosition = yPosition
         #stop servos once at goal
@@ -185,7 +190,7 @@ class Etch:
         xPosition = xRelativePosition + self.xRotations*4095
         yPosition = yRelativePosition + self.yRotations*4095
         if output:
-            print("position(",xPosition,",",yPosition,") rotpos(",xRotationPosition,",",yRotationPosition,") startpos(",self.xStartPosition,",",self.yStartPosition,")")
+            print("position(",xPosition,",",yPosition,") rotpos(",xRotationPosition,",",yRotationPosition,") startpos(",self.xStartPosition,",",self.yStartPosition,")",file = self.sourceFile)
         return xPosition, xRotationPosition, yPosition, yRotationPosition
 
     def setRotations(self,xPosition,xForward,yPosition,yForward,output):
@@ -212,7 +217,7 @@ class Etch:
                 self.yRotations = self.yRotations - 1
                 yChange = True
         if output:
-            print("diff(",xdiff,",",ydiff,") rots(", self.xRotations,",",self.yRotations,") forward(",xForward,",",yForward,")")
+            print("diff(",xdiff,",",ydiff,") rots(", self.xRotations,",",self.yRotations,") forward(",xForward,",",yForward,")",file = self.sourceFile)
         return xChange,yChange
 
     def setVelocity(self,x,xPosition,xInitialDistance,y,yPosition,yInitialDistance,output):
@@ -224,15 +229,15 @@ class Etch:
         if xInitialDistance == 0:
             velocity = max(abs(y-yPosition)/yInitialDistance*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
             if output:
-                print("x 0 vel",velocity)
+                print("x 0 vel",velocity,file = self.sourceFile)
         elif yInitialDistance == 0:
             velocity = max(abs(x-xPosition)/xInitialDistance*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
             if output:
-                print("y 0 vel",velocity)
+                print("y 0 vel",velocity,file = self.sourceFile)
         else:
             velocity = max(min(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
             if output:
-                print("vel",velocity)
+                print("vel",velocity,file = self.sourceFile)
         #how far x has to go compared to y
         ratiox = .5
         if abs(yPosition - y) + abs(xPosition - x) > 0:
@@ -250,7 +255,7 @@ class Etch:
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,math.floor(xVelocity))
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,math.floor(yVelocity))
         if output:
-            print("ratio(",ratiox,",",ratioy,") vels(",xVelocity,",",yVelocity,")")
+            print("ratio(",ratiox,",",ratioy,") vels(",xVelocity,",",yVelocity,")",file = self.sourceFile)
 
     def disconect(self):
         # Disable Dynamixel Torque
@@ -259,6 +264,3 @@ class Etch:
 
         # Close port
         self.portHandler.closePort()
-
-#xmax = 18000
-#ymax = 12000

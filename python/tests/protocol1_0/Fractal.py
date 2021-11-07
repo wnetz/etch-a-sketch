@@ -74,20 +74,20 @@ class Fractal:
     def clear(self):
         self.points = []
         self.frontier = []
+        self.etch.goto(0,0)
 
 fractal = Fractal()
 
-while 1:
-    print("enter depth")
-    depth = int(input())
-    print("enter lenght")
-    lenght = float(input())
-    print("enter ratio")
-    ratio = float(input())
-    print("enter angle")
-    angle = float(input())
-    print(depth,lenght,ratio,math.radians(angle))
-    fractal.generateTree(depth,lenght,ratio,math.radians(angle))
-    fractal.drawTree()
-    fractal.clear()
-print("enter rezolution")
+
+print("enter depth")
+depth = int(input())
+print("enter lenght")
+lenght = float(input())
+print("enter ratio")
+ratio = float(input())
+print("enter angle")
+angle = float(input())
+print(depth,lenght,ratio,math.radians(angle))
+fractal.generateTree(depth,lenght,ratio,math.radians(angle))
+fractal.drawTree()
+fractal.clear()
