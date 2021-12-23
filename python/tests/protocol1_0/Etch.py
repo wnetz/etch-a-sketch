@@ -51,7 +51,9 @@ DXL_D                       = 254
 DXL_I                       = 0
 DXL_P                       = 20
 DXL_MAXIMUM_SPEED           = 50 
-DXL_MINIMUM_SPEED           = 15  
+DXL_MINIMUM_SPEED           = 5  
+DIFF                        = DXL_MAXIMUM_SPEED-DXL_MINIMUM_SPEED
+GIVE                        = 50 
 
 class Etch:
     def __init__(self):        
@@ -151,9 +153,11 @@ class Etch:
         yInitialDistance = abs(y-yPosition)
         if output:
             print("got to: (",x,",",y,")",file = self.sourceFile)
-        GIVE = 50        
+
+        xcount = 0
+        ycount = 0
         #while not at goal
-        while x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition:
+        while x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition:        
             #get current position
             xPosition, xRotationPosition, yPosition, yRotationPosition = self.getPosition(output)
             #update rotations
@@ -164,12 +168,22 @@ class Etch:
                 xPosition, do, nt, care = self.getPosition(output)
             elif yChange:
                 do, nt, yPosition, care = self.getPosition(output)
-            self.setVelocity(x,xPosition,xInitialDistance,y,yPosition,yInitialDistance,output) 
-            if output:
-                print(x - GIVE > xPosition, x + GIVE < xPosition, y - GIVE > yPosition, y + GIVE < yPosition,x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition,file = self.sourceFile)
-                print("----------------------------------------",file = self.sourceFile)
-            self.xLastPosition = xPosition
-            self.yLastPosition = yPosition
+
+            if (xPosition < x and x < self.xLastPosition) or (xPosition > x and x > self.xLastPosition):
+                xcount = xcount + 1
+            if (yPosition < y and y < self.yLastPosition) or (yPosition > y and y > self.yLastPosition):
+                ycount = ycount + 1
+            if xcount == 2 or ycount == 2:
+                x = xPosition
+                y = yPosition            
+            else:
+                print("xcount: ",xcount," ycount: ",ycount,file = self.sourceFile)
+                self.setVelocity(x,xPosition,xInitialDistance,y,yPosition,yInitialDistance,output) 
+                if output:
+                    print(x - GIVE > xPosition, x + GIVE < xPosition, y - GIVE > yPosition, y + GIVE < yPosition,x - GIVE > xPosition or x + GIVE < xPosition or y - GIVE > yPosition or y + GIVE < yPosition,file = self.sourceFile)
+                    print("----------------------------------------",file = self.sourceFile)
+                self.xLastPosition = xPosition
+                self.yLastPosition = yPosition
         #stop servos once at goal
         self.packetHandler.write2ByteTxRx(self.portHandler,HORIZONTAL,ADDR_MX_MOVING_SPEED,0)
         self.packetHandler.write2ByteTxRx(self.portHandler,VERTICAL,ADDR_MX_MOVING_SPEED,0)
@@ -222,30 +236,31 @@ class Etch:
 
     def setVelocity(self,x,xPosition,xInitialDistance,y,yPosition,yInitialDistance,output):
         ratiox = .5
-        ratioy = .5
-        #velocity must be between DXL_MINIMUM_SPEED and DXL_MAXIMUM_SPEED
-        #takes the servo closest to its goal to determin the total velocity shared
-        velocity = 0
-        if xInitialDistance == 0:
-            velocity = max(abs(y-yPosition)/yInitialDistance*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
-            if output:
-                print("x 0 vel",velocity,file = self.sourceFile)
-        elif yInitialDistance == 0:
-            velocity = max(abs(x-xPosition)/xInitialDistance*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
-            if output:
-                print("y 0 vel",velocity,file = self.sourceFile)
-        else:
-            velocity = max(min(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
-            if output:
-                print("vel",velocity,file = self.sourceFile)
-        #how far x has to go compared to y
-        ratiox = .5
         if abs(yPosition - y) + abs(xPosition - x) > 0:
             ratiox = abs((xPosition - x))/(abs(yPosition - y) + abs(xPosition - x))
         ratioy = 1 - ratiox
+        #velocity must be between DXL_MINIMUM_SPEED and DXL_MAXIMUM_SPEED
+        #takes the servo closest to its goal to determin the total velocity shared
+        velocity = 0
+        if xInitialDistance < GIVE:
+            #velocity = max(min(abs(y-yPosition)/yInitialDistance*DXL_MAXIMUM_SPEED,DXL_MAXIMUM_SPEED),DXL_MINIMUM_SPEED)
+            ratiox = 0
+            if output:
+                print("x 0 vel",velocity,file = self.sourceFile)
+        elif yInitialDistance < GIVE:
+            #velocity = max(min(abs(x-xPosition)/xInitialDistance*DXL_MAXIMUM_SPEED,DXL_MAXIMUM_SPEED),DXL_MINIMUM_SPEED)
+            ratioy=0
+            if output:
+                print("y 0 vel",velocity,file = self.sourceFile)
+        else:
+            #velocity = max(min(abs(x-xPosition)/xInitialDistance,abs(y-yPosition)/yInitialDistance)*DXL_MAXIMUM_SPEED,DXL_MINIMUM_SPEED)
+            if output:
+                print("vel",velocity,file = self.sourceFile)            
+        #how far x has to go compared to y
+        
         #velocity split between the two based on ration of distance to go
-        xVelocity = ratiox*velocity
-        yVelocity = ratioy*velocity
+        xVelocity = DXL_MINIMUM_SPEED + ratiox*DIFF
+        yVelocity = DXL_MINIMUM_SPEED + ratioy*DIFF
         #if the velocity is supposed to negative add 1023 since the last bit ditermins the direction
         if xPosition > x:
             xVelocity = xVelocity + 1024

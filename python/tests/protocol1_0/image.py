@@ -11,7 +11,7 @@ PRINT_ETCH = True
 class Image:
     def __init__(self):
         self.points = []
-        self.image = cv2.imread("C:/Users/wnetz/Documents/etch-a-sketch/python/tests/protocol1_0/dis.jpg", 0)
+        self.image = cv2.imread("C:/Users/wnetz/Documents/etch-a-sketch/python/tests/protocol1_0/tri.png", 0)
         self.imageShape = 0
         self.etch = Etch()
         self.sourceFile = open('C:/Users/wnetz/Documents/etch-a-sketch/python/tests/protocol1_0/test.txt', 'w')
@@ -33,13 +33,13 @@ class Image:
             for y in range(self.imageShape[1]):
                 #if there is an edge pixle
                 if self.image[x][y] == 255:
-                    point = (((x  -self.imageShape[0] + 1) * -1) * 18000/self.imageShape[0], y * 12000/self.imageShape[1])
+                    point = (((x  -self.imageShape[1] + 1) * -1) * 18000/self.imageShape[1], y * 12000/self.imageShape[0])
                     self.points.append(point)
                     #print ("("+str(point[0]) + "," + str(point[1])+")")
-                    #print("X",end='',file = self.sourceFile)
-                #else:
-                    #print(" ",end='',file = self.sourceFile)
-            #print("",file = self.sourceFile)
+                    print("X",end='',file = self.sourceFile)
+                else:
+                    print(" ",end='',file = self.sourceFile)
+            print("",file = self.sourceFile)
         print(len(self.points))
     def drawImage(self):
         avg = 0
@@ -54,9 +54,9 @@ class Image:
             lessmin = []
             for point in self.points:
                 dist = math.pow(math.pow(point[0]-oldmin[0],2) + math.pow(point[1]-oldmin[1],2),.5)
-                if point[0]-oldmin[0] < 100 and point[1]-oldmin[1] < 100:
+                if min < dist and dist < 100:
                     lessmin.append(point)
-                elif dist < min:
+                if dist < min:
                     min = dist
                     minpoint = point
                 #if min < 3:
@@ -70,10 +70,11 @@ class Image:
                 self.points.remove(point)
             if len(minpoint) > 0:
                 self.points.remove(minpoint)
+                self.etch.goto(minpoint[0],minpoint[1],PRINT_ETCH)
             if len(self.points) % 1000 == 0:
                 print(len(self.points))
-            print(str(min) + " (" + str(minpoint) + ")")
-            self.etch.goto(minpoint[0],minpoint[1],PRINT_ETCH)
+            print(str(min) + " (" + str(minpoint) + ") ",len(self.points))
+            
         print("total " + str(avg) + " " + str(numpoints))
         print("total " + str(avg/numpoints))
     def end(self):
